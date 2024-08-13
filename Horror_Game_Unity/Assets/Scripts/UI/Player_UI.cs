@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Runtime.Versioning;
 
 public class Player_UI : MonoBehaviour
 {
@@ -15,22 +17,30 @@ public class Player_UI : MonoBehaviour
     [SerializeField] private float max_stamina = 100f;
     [SerializeField] private float bar_health_chipSpeed = 2.0f;
     [SerializeField] private float bar_stamina_chipSpeed = 6.0f;
-    private bool stamina_can_sprint;
-
-    //Reference Level
-    private Level level;
     //Reference Healthbars
     public Image front_healthbar;
     public Image back_healthbar;
     //Reference Stamina Bars
     public Image front_staminabar;
     public Image back_staminabar;
-    //To detect changes
-    private float last_health;
-    private float last_stamina;
     //For chip effect
     public float lerp_timer_health;
     public float lerp_timer_stamina;
+    //To detect changes
+    private float last_health;
+    private float last_stamina;
+    private bool stamina_can_sprint;
+
+    [Header("Exposure")]
+    public Slider exposure_meter;
+    public TMP_Text TMP_exposure_level;
+    //To detect changes
+    private int exposure_level_last = 0;
+    private float exposure_amount_last = 0.0f;
+
+    [Header("Misc")]
+    //Reference Level
+    private Level level;
 
     void Start()
     {
@@ -44,6 +54,10 @@ public class Player_UI : MonoBehaviour
         //Set last health and stamina to max
         last_health = max_health;
         last_stamina = max_stamina;
+
+        //Set exposure meters to base
+        exposure_meter.value = 0.0f;
+        TMP_exposure_level.text = " 0 ";
     }
 
     public void UpdateUIHealthStamina(float current_health, float current_stamina)
@@ -60,6 +74,7 @@ public class Player_UI : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0, max_stamina);
         UpdateHealthUI();
         UpdateStaminaUI();
+        UpdateExposureLevel();
     }
 
     public void ResetHealthLerp()
@@ -201,4 +216,61 @@ public class Player_UI : MonoBehaviour
                 }
             }
         }
+
+    //Update Exposure Level
+    private void UpdateExposureLevel()
+    {
+        //Grab exposures from level
+        int exposure_level = level.exposure_level;
+        float exposure_amount = level.exposure_amount;
+
+        //See if changes
+        if (exposure_level != exposure_level_last)
+        {
+            //Change level text
+            string text = exposure_level_text(exposure_level);
+            TMP_exposure_level.text = text;
+            //Change
+            exposure_level_last = exposure_level;
+        }
+
+        //Exposure Amount
+        //See changes
+        if (exposure_amount != exposure_amount_last)
+        {
+            //If different change it up
+            //Set to percentage first
+            float value = exposure_amount / level.exposure_amount_max;
+            exposure_meter.value = value;
+            //Change
+            exposure_amount_last = exposure_amount;
+        }
+    }
+
+    //Exposure Level Text
+    private string exposure_level_text(int level)
+    {
+        string output = "";
+
+        switch (level)
+        {
+            case 0:
+                output = "0";
+                break;
+            case 1:
+                output = "I";
+                break;
+            case 2:
+                output = "II";
+                break;
+            case 3:
+                output = "III";
+                break;
+            default:
+                output = "X";
+                break;
+        }
+
+        return output;
+    }
 }

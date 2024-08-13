@@ -625,7 +625,10 @@ MonoBehaviour:
   mouse_y_input: Mouse Y
   vertical_rotation: 0
   hitpoints: 100
-  stamina: 10
+  stamina: 100
+  stamina_drain_rate: 12
+  stamina_regain_rate: 6
+  stamina_run_threshold: 25
   can_sprint: 1
   game_music_source: {fileID: 5647224520788490978}
   on_hit_grunt_source: {fileID: 652148232362821086}
