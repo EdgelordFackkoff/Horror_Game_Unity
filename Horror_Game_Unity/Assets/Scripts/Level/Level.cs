@@ -27,9 +27,11 @@ public class Level : MonoBehaviour
 
     [Header("Level Audio")]
     public AudioSource player_music_source;
+    public AudioSource player_exposure_alert_source;
+    [SerializeField] private AudioClip level_exposure_increase_alert;
+    [SerializeField] private AudioClip level_exposure_decrease_alert;
     [SerializeField] private AudioClip[] level_music;
     [SerializeField] private int current_music;
-    [SerializeField] private AudioClip[] level_stings;
 
     [Header("Global/Shared Variables")]
     public Player player;
@@ -123,6 +125,20 @@ public class Level : MonoBehaviour
             //Music change
             ChangeMusic(exposure_level);
 
+            //Play the alert clip
+            if (last_exposure_level < exposure_level)
+            {
+                //Exposure Increase Alert
+                player_exposure_alert_source.clip = level_exposure_increase_alert;
+                player_exposure_alert_source.Play();
+            }
+            else
+            {
+                //Exposure Decrease Alert
+                player_exposure_alert_source.clip = level_exposure_decrease_alert;
+                player_exposure_alert_source.Play();
+            }
+
             //New level
             last_exposure_level = exposure_level;
         }
@@ -130,93 +146,84 @@ public class Level : MonoBehaviour
 
     public void increase_exposure_amount(float amount)
     {
-        UnityEngine.Debug.Log("input_amount " + amount);
-        //Detect if amount + old amount over 100f
-        float check = amount + exposure_amount;
-        if (check > exposure_amount_max)
-        {
-            //Fool proofing
-            bool loop = true;
-            int increase = 0;
+        float check_amount = exposure_amount + amount;
 
-            while (loop)
+        //Handle increase
+        while (check_amount >= 100.0f)
+        {
+            if (exposure_level < 3)
             {
-                if (check > exposure_amount_max)
-                {
-                    //Store leftovers
-                    check = check - exposure_amount_max;
-                    increase++;
-                }
-                else
-                {
-                    //Finish loop
-                    loop = false;
-                }
+                increase_exposure_level(1);
+                check_amount -= 100.0f;
             }
-            
-            //Increase level
-            increase_exposure_level(increase);
-            //Set exposure amount
-            exposure_amount = check;
+
+            //Cap it
+            else
+            {
+                //Workaround
+                check_amount = 99.9f;
+                break;
+            }
         }
+
+        //Workaround
+        exposure_amount = check_amount + 0.1f;
     }
 
     public void increase_exposure_level(int increase)
     {
         //Detect if not 4 and if added will not go over 4
-        if (exposure_level < 4 && increase + exposure_level <= 4)
+        if (exposure_level < 3 && increase + exposure_level <= 3)
         {
             //Add
             exposure_level += increase;
         }
-        //Else set to 4
+        //Else set to 3
         else
         {
-            exposure_level = 4;
+            exposure_level = 3;
         }
+
+        UnityEngine.Debug.Log("Current Exposure Level: " + exposure_level);
     }
 
     public void decrease_exposure_amount(float amount)
     {
-        //Detect if amount + old amount over 100f
-        float check = exposure_amount - amount;
-        if (check < 0.0f)
-        {
-            //Fool proofing
-            bool loop = true;
-            int decrease = 0;
+        //Make it negative
+        amount = -1.0f * amount;
+        float check_amount = exposure_amount + amount;
 
-            while (loop)
+        //Handle increase
+        while (check_amount < 0.0f)
+        {
+            if (exposure_level > 0)
             {
-                if (check < exposure_amount_max)
-                {
-                    //Store leftovers
-                    check = exposure_amount - amount;
-                    decrease++;
-                }
-                else
-                {
-                    //Finish loop
-                    loop = false;
-                }
+                decrease_exposure_level(1);
+                check_amount += 100.0f;
             }
 
-            //Increase level
-            increase_exposure_level(decrease);
-            //Set exposure amount
-            exposure_amount = check;
+            //Cap it
+            else
+            {
+                //Workaround
+                check_amount = 0.1f;
+                break;
+            }
         }
+
+        //Workaround
+        exposure_amount = check_amount - 0.1f;
     }
 
     public void decrease_exposure_level(int decrease)
     {
         //Detect if not 0 and if decreased will not go under 0
-        if (exposure_level > 0 && exposure_level - decrease <= 0)
+        if (exposure_level > 0 && exposure_level - decrease >= 0)
         {
             //Add
             exposure_level -= decrease;
         }
-        //Else set to 4
+        //Else set to 0
         else
         {
             exposure_level = 0;

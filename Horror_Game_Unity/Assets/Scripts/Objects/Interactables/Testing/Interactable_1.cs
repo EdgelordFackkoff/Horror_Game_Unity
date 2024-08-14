@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Interactable_1 : Interactable
 {
-    //Inherited
+    // Empty
     public override void effect()
     {
-        //Increase exposure level
-        level.increase_exposure_amount(25.0f);
+        increase_exposure();
     }
 }

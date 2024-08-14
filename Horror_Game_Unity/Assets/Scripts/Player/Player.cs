@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float walk_speed = 3.0f;
-    [SerializeField] private float sprint_multipler = 3.0f;
+    [SerializeField] private float sprint_multipler = 5.0f;
     [SerializeField] private float jump_force = 3.0f;
     //This will not change
     private float gravity;
@@ -40,6 +41,8 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     [Header("Game Music")]
     [SerializeField] public AudioSource game_music_source;
+    [Header("Alerts")]
+    [SerializeField] public AudioSource exposure_alert_source;
     [Header("Pain/Grunt")]
     [SerializeField] public AudioSource on_hit_grunt_source;
     [SerializeField] private AudioClip[] on_hit_grunts_sounds;
@@ -275,10 +278,25 @@ public class Player : MonoBehaviour
 
     void HandleInteract()
     {
-        if (Input.GetKey(interact_key) == true && current_interacting != null)
+        if (current_interacting != null)
         {
-            UnityEngine.Debug.Log("Interacting");
-            current_interacting.effect();
+            //Detect if instant or normal
+            if (current_interacting.instant_interact() == true)
+            {
+                if (Input.GetKeyDown(interact_key))
+                {
+                    current_interacting.effect();
+                    UnityEngine.Debug.Log("Instant interact");
+                }
+            }
+            else
+            {
+                if (Input.GetKey(interact_key))
+                {
+                    current_interacting.effect();
+                    UnityEngine.Debug.Log("Non-Instant interact");
+                }
+            }
         }
     }
 

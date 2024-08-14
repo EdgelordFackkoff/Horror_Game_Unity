@@ -37,11 +37,16 @@ public class Player_UI : MonoBehaviour
     //To detect changes
     private int exposure_level_last = 0;
     private float exposure_amount_last = 0.0f;
+    public TMP_Text TMP_exposure_increase_alert;
+    public TMP_Text TMP_exposure_decrease_alert;
+    [SerializeField] private string exposure_alert_increase = "EXPOSURE LEVEL INCREASED";
+    [SerializeField] private string exposure_alert_decrease = "EXPOSURE LEVEL DECREASED";
 
     [Header("Interact")]
     public TMP_Text TMP_interact_text;
     public TMP_Text TMP_interact_name;
     public TMP_Text TMP_interact_desc;
+    public Slider interact_bar;
 
     [Header("Misc")]
     //Reference Level
@@ -67,6 +72,13 @@ public class Player_UI : MonoBehaviour
         //Set exposure meters to base
         exposure_meter.value = 0.0f;
         TMP_exposure_level.text = " 0 ";
+
+        //Set exposure alerts off
+        TMP_exposure_increase_alert.text = " ";
+        TMP_exposure_decrease_alert.text = " ";
+
+        //Hide slider
+        interact_bar.gameObject.SetActive(false);
     }
 
     public void UpdateUIHealthStamina(float current_health, float current_stamina)
@@ -119,12 +131,40 @@ public class Player_UI : MonoBehaviour
             //Grab desc
             string interaction_desc = current_interaction.get_desc();
             TMP_interact_desc.text = interaction_desc;
+
+            //Get from player whether interaction is constant or instant
+            if (current_interaction.instant_interact() == true)
+            {
+                //Hide bar
+                interact_bar.gameObject.SetActive(false);
+                //Reset Value in case
+                interact_bar.value = 0.0f;
+            }
+            else
+            {
+                //Show Bar
+                interact_bar.gameObject.SetActive(true);
+                //Get values
+                float current_value = current_interaction.interact_value();
+                if (current_value <= 0)
+                {
+                    //Workaround
+                    current_value = 0.01f;
+                }
+                float max_value = current_interaction.interact_value_max();
+                //Get percentage
+                float percent_value = current_value / max_value;
+                //Set value
+                interact_bar.value = percent_value;
+            }
         }
         else
         {
             TMP_interact_text.text = "";
             TMP_interact_name.text = "";
             TMP_interact_desc.text = "";
+            //Hide bar
+            interact_bar.gameObject.SetActive(false);
         }
 
     }
@@ -267,7 +307,18 @@ public class Player_UI : MonoBehaviour
             //Change level text
             string text = exposure_level_text(exposure_level);
             TMP_exposure_level.text = text;
-            //Change
+            //Alert
+            if (exposure_level > exposure_level_last)
+            {
+                //Increase alert
+                exposure_alert(1);
+            }
+            else
+            {
+                //Decrease alert
+                exposure_alert(2);
+            }
+
             exposure_level_last = exposure_level;
         }
 
@@ -309,5 +360,54 @@ public class Player_UI : MonoBehaviour
         }
 
         return output;
+    }
+
+    //Exposure Alert
+    private void exposure_alert(int x)
+    {
+        //1 or 2
+        //1 being increase and 2 being decreased
+
+        switch (x)
+        {
+            case 1:
+                TMP_exposure_increase_alert.text = exposure_alert_increase;
+                TMP_exposure_decrease_alert.text = " ";
+                //Start enumerator
+                StartCoroutine(alert_cooldown(1));
+                break;
+            case 2:
+                //Set exposure alerts off
+                TMP_exposure_increase_alert.text = " ";
+                TMP_exposure_decrease_alert.text = exposure_alert_decrease;
+                //Start enumerator
+                StartCoroutine(alert_cooldown(2));
+                break;
+            default:
+                //You're not supposed to be here.
+                break;
+
+        }
+    }
+
+    //Exposure Alert cooldown
+    IEnumerator alert_cooldown(int x)
+    {
+        int countdown = 3;
+        while (countdown > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            countdown--;
+        }
+
+        if (x == 1)
+        {
+            TMP_exposure_increase_alert.text = " ";
+        }
+        
+        if (x == 2)
+        {
+            TMP_exposure_decrease_alert.text = " ";
+        }
     }
 }

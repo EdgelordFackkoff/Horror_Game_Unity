@@ -16,7 +16,12 @@ public abstract class Interactable : MonoBehaviour
     //Variable to detect if it is an instant interact
     [SerializeField] private bool instant_interactable;
     //If there is a period where you have to constantly interact with said object
-    [SerializeField] private float interactable_value;
+    [SerializeField] public float interactable_value;
+    [SerializeField] public float interactable_value_max;
+
+    [Header("Advanced Fields")]
+    [SerializeField] private float increase_exposure_amount;
+    [SerializeField] private float decrease_exposure_amount;
 
     [Header("References")]
     [SerializeField] public GameObject model_object;
@@ -48,6 +53,11 @@ public abstract class Interactable : MonoBehaviour
         return interactable_value;
     }
 
+    public float interact_value_max()
+    {
+        return interactable_value_max;
+    }
+
     public string get_name()
     {
         return interactable_name;
@@ -69,6 +79,21 @@ public abstract class Interactable : MonoBehaviour
         interactable_value -= value;
     }
 
+    public void increase_exposure()
+    {
+        if (increase_exposure_amount > 0)
+        {
+            level.increase_exposure_amount(increase_exposure_amount);
+        }
+    }
+
+    public void decrease_exposure()
+    {
+        if (decrease_exposure_amount > 0)
+        {
+            level.decrease_exposure_amount(decrease_exposure_amount);
+        }
+    }
 
     //0 is false, 1 is yes
     public void set_interactability(int x)
