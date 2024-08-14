@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 
 public class Enemy : MonoBehaviour
@@ -19,8 +18,8 @@ public class Enemy : MonoBehaviour
     //};
     //public Behaviour behaviour;
 
-    [Header("Level")] // Get exposure
-    public GameObject level_gameobject;
+    [Header("References")] // Get exposure
     public Level level;
-
+    public Animator animator;
+    public Enemy_Animation_Event animation_events;
 }
