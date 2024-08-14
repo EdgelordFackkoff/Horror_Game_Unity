@@ -38,14 +38,23 @@ public class Player_UI : MonoBehaviour
     private int exposure_level_last = 0;
     private float exposure_amount_last = 0.0f;
 
+    [Header("Interact")]
+    public TMP_Text TMP_interact_text;
+    public TMP_Text TMP_interact_name;
+    public TMP_Text TMP_interact_desc;
+
     [Header("Misc")]
     //Reference Level
     private Level level;
+    //Reference Player
+    private Player player;
 
     void Start()
     {
         //Reference Level
         level = GetComponentInParent<Level>();
+        //Reference Player
+        player = level.return_player();
 
         //Start with full health and stamina
         health = max_health;
@@ -75,6 +84,7 @@ public class Player_UI : MonoBehaviour
         UpdateHealthUI();
         UpdateStaminaUI();
         UpdateExposureLevel();
+        UpdateInteractFrame();
     }
 
     public void ResetHealthLerp()
@@ -90,6 +100,33 @@ public class Player_UI : MonoBehaviour
     public void SetSprintAllowed(bool state)
     {
         stamina_can_sprint = state;
+    }
+
+    //Update Interact Frame
+    private void UpdateInteractFrame()
+    {
+        //Grab from player
+        Interactable current_interaction = player.getCurrentInteractable();
+        //If not null
+        if (current_interaction != null)
+        {
+            //Make Press X
+            string interaction_key = level.interact_key.ToString();
+            TMP_interact_text.text = "Press " + interaction_key;
+            //Grab name
+            string interaction_name = current_interaction.get_name();
+            TMP_interact_name.text = interaction_name;
+            //Grab desc
+            string interaction_desc = current_interaction.get_desc();
+            TMP_interact_desc.text = interaction_desc;
+        }
+        else
+        {
+            TMP_interact_text.text = "";
+            TMP_interact_name.text = "";
+            TMP_interact_desc.text = "";
+        }
+
     }
 
     //Update Health UI

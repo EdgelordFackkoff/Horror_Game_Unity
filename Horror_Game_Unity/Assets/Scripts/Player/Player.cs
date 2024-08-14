@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private string vertical_move_input;
     private KeyCode sprint_key;
     private KeyCode jump_key;
+    private KeyCode interact_key;
     //No one in their right minds will change this
     [SerializeField] private string mouse_x_input = "Mouse X";
     [SerializeField] private string mouse_y_input = "Mouse Y";
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float stamina_regain_rate = 5.00f;
     [SerializeField] private float stamina_run_threshold = 30.0f;
     [SerializeField] private bool can_sprint = true;
+    [SerializeField] private bool is_interacting = false;
+    [SerializeField] private Interactable current_interacting;
 
     [Header("Audio")]
     [Header("Game Music")]
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
     //For Audio
     private float next_step_time;
     private int last_played_footstep = -1;
+    [Header("References")]
     //CharacterController variable
     public CharacterController character_controller;
     //Player UI variable
@@ -65,6 +69,8 @@ public class Player : MonoBehaviour
     private Player_UI player_ui;
     //Main Camera control
     public Camera main_camera;
+    public GameObject damage_hitbox;
+    public GameObject interact_hitbox;
     //Level variable
     private Level level;
 
@@ -95,6 +101,7 @@ public class Player : MonoBehaviour
         HandleRotation();
         HandleFootsteps();
         HandleHealthStamina();
+        HandleInteract();
         //Give UI can sprint or not info
         player_ui.SetSprintAllowed(can_sprint);
     }
@@ -108,6 +115,7 @@ public class Player : MonoBehaviour
         vertical_move_input = level.vertical_move_input;
         sprint_key = level.sprint_key;
         jump_key = level.jump_key;
+        interact_key = level.interact_key;
     }
 
     //Handle Movement
@@ -263,6 +271,41 @@ public class Player : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0, 100.0f);
         //Update the hitpoint and stamina for UI
         player_ui.UpdateUIHealthStamina(hitpoints, stamina);
+    }
+
+    void HandleInteract()
+    {
+        if (Input.GetKey(interact_key) == true && current_interacting != null)
+        {
+            UnityEngine.Debug.Log("Interacting");
+            current_interacting.effect();
+        }
+    }
+
+    //Handle Interact
+    public void HandleInteractableEnter(Collider other)
+    {
+        current_interacting = other.GetComponent<Interactable>();
+    }
+
+    public void HandleInteractableStay(Collider other)
+    {
+        current_interacting = other.GetComponent<Interactable>();
+    }
+
+    public void HandleInteractableExit(Collider other)
+    {
+        current_interacting = null;
+    }
+
+    public void HandleInteractableNone()
+    {
+        current_interacting = null;
+    }
+
+    public Interactable getCurrentInteractable()
+    {
+        return current_interacting;
     }
 
     //DAMAGE

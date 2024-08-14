@@ -23,6 +23,7 @@ public class Level : MonoBehaviour
     public string vertical_move_input = "Vertical";
     public KeyCode sprint_key = KeyCode.LeftShift;
     public KeyCode jump_key = KeyCode.Space;
+    public KeyCode interact_key = KeyCode.E;
 
     [Header("Level Audio")]
     public AudioSource player_music_source;
@@ -31,8 +32,8 @@ public class Level : MonoBehaviour
     [SerializeField] private AudioClip[] level_stings;
 
     [Header("Global/Shared Variables")]
+    public Player player;
     public float gravity = 9.18f;
-
 
     //Start
     void Awake()
@@ -80,22 +81,34 @@ public class Level : MonoBehaviour
         //Later
     }
 
+    //Return player
+    public Player return_player()
+    {
+        return player;
+    }
+
     //MUSIC
     private void ChangeMusic(int x)
     {
-        UnityEngine.Debug.Log(x);
         if (level_music.Length == 1)
         {
             player_music_source.clip = level_music[0];
         }
         else
         {
-            player_music_source.clip = level_music[x];
+            if (x < level_music.Length)
+            {
+                player_music_source.clip = level_music[x];
+            }
+            
         }
 
         //Change current music
         current_music = x;
-        player_music_source.Play();
+        if (player_music_source != null)
+        {
+            player_music_source.Play();
+        }
     }
 
     //EXPOSURE
@@ -117,6 +130,7 @@ public class Level : MonoBehaviour
 
     public void increase_exposure_amount(float amount)
     {
+        UnityEngine.Debug.Log("input_amount " + amount);
         //Detect if amount + old amount over 100f
         float check = amount + exposure_amount;
         if (check > exposure_amount_max)

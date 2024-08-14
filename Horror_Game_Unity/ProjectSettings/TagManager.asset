@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Enemies
   - Interactables
-  - 
-  - 
-  - 
+  - Hitbox
+  - PickUps
+  - NO INTERACTION
   - 
   - 
   - 
