@@ -4,27 +4,58 @@ using UnityEngine;
 
 public class Enemy_Animation_Event : MonoBehaviour
 {
-    [Header("Shared")]
-    public Enemy linked_enemy;
     [Header("Knight Animation Events")]
-    private bool isactive = false;
+    //0 is inactive
+    //1 is activating
+    //2 is active
+    //3 is deactivating
+    //4 is moving, by definition 2 is already active
+    private int knight_current_state = 0;
 
     //Knight
-    public void Activated()
+    public void Activating_Knight()
     {
-        //Active knight
-        isactive = true;
+        //Activating knight
+        knight_current_state = 1;
+        UnityEngine.Debug.Log(knight_current_state);
+
     }
 
-    public void Deactivated()
+    public void Activated_Knight()
     {
-        //Active knight
-        isactive = false;
+        //Activate knight
+        knight_current_state = 2;
+        UnityEngine.Debug.Log(knight_current_state);
+
     }
 
-    public bool ActivationStatus()
+    public void Deactivating_Knight()
+    {
+        //Deactivating knight
+        knight_current_state = 3;
+        UnityEngine.Debug.Log(knight_current_state);
+
+    }
+
+    public void Deactivated_Knight()
+    {
+        //Deactivate knight
+        knight_current_state = 0;
+        UnityEngine.Debug.Log(knight_current_state);
+
+    }
+
+    public void Walking_Knight()
+    {
+        //Deactivate knight
+        knight_current_state = 4;
+        UnityEngine.Debug.Log(knight_current_state);
+
+    }
+
+    public int Knight_ActivationStatus()
     {
         //return
-        return isactive;
+        return knight_current_state;
     }
 }
