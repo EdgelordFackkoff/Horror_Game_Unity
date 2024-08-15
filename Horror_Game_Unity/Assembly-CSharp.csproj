@@ -69,12 +69,12 @@
     <Compile Include="Assets\material.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_1.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Materials\Level_2_Castle\Environment\Fire\AnimateTiledTexture.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_3.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_4.cs" />
     <Compile Include="Assets\Scripts\UI\Player_UI.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Librarian\Librarian.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactables_2.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Enemies\Knight\Enemy_Knight.cs" />
