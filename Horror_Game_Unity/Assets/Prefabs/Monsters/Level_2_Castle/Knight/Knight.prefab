@@ -805,6 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd673085f1c45f348b20aa4f1b6a21c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linked_enemy: {fileID: 3464202130825097638}
 --- !u!4 &8514601084022259297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4166025600320861289, guid: a7b036db9ae19bd42924fc80232ea4d4, type: 3}

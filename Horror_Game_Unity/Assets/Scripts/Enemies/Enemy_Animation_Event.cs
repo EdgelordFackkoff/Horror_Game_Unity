@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_Animation_Event : MonoBehaviour
 {
+    [Header("Shared")]
+    public Enemy linked_enemy;
     [Header("Knight Animation Events")]
     private bool isactive = false;
 

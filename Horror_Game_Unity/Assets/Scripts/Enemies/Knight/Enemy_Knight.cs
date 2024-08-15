@@ -11,19 +11,30 @@ public class Enemy_Knight : Enemy
     // Start
     void Start()
     {
-        animator.SetBool("Inactive", true);
+        
     }
 
-    // Animation Tests
-    void Update()
+    //Handle animation
+    public override void Handle_Animation()
     {
-        if (level.exposure_level > 0)
-        {
-            //It becomes active
-            animator.SetBool("Inactive", false);
-            animator.SetBool("Active", true);
 
-        }
+    }
+
+    //Handle animation
+    public override void Handle_Navigation()
+    {
+
+    }
+
+    //Handle animation
+    public override void Handle_Behaviour()
+    {
+
+    }
+
+    //Handle 
+    public override void Handle_Misc()
+    {
 
     }
 }
