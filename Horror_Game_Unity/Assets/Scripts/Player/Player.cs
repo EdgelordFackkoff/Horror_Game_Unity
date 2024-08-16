@@ -356,7 +356,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            random_index = Random.Range(0, footstep_sounds.Length - 1);
+            random_index = UnityEngine.Random.Range(0, footstep_sounds.Length - 1);
             if (random_index >= last_played_footstep)
             {
                 random_index++;

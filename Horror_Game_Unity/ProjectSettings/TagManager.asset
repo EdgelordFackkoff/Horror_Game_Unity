@@ -16,10 +16,10 @@ TagManager:
   - Interactables
   - Hitbox
   - PickUps
+  - Collision_Others
+  - Environment
   - NO INTERACTION
-  - 
-  - 
-  - 
+  - PostProcessing
   - 
   - 
   - 
