@@ -300,6 +300,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     //Handle Interact
     public void HandleInteractableEnter(Collider other)
     {

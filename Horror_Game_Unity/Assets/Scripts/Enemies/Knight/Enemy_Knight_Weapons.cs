@@ -20,7 +20,6 @@ public class Enemy_Knight_Weapons : MonoBehaviour
     {
         //Random Integer
         int random = UnityEngine.Random.Range(0, polearms_list.Length);
-        UnityEngine.Debug.Log(random);
         //Assign the int
         polearm_int = random;
         //Go through list and only activate one

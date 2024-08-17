@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walk_speed: 3
-  sprint_multipler: 5
+  sprint_multipler: 3
   jump_force: 3
   mouse_sensitivity: 0
   up_down_range: 80

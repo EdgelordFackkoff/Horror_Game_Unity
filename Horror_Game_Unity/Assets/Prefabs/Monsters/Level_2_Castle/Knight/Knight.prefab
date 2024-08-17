@@ -336,6 +336,9 @@ MonoBehaviour:
   speed_1: 1.4
   speed_2: 1.6
   speed_3: 1.8
+  main_camera: {fileID: 0}
+  collider_main: {fileID: 9074079235583738860}
+  camera_seen: 0
 --- !u!54 &7323813947230807691
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1331,8 +1334,8 @@ Transform:
   m_GameObject: {fileID: 8912614034235222322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0.927, z: 0.611}
-  m_LocalScale: {x: 1.31, y: 1.79, z: 0.74}
+  m_LocalPosition: {x: 0.01, y: 0.927, z: 0.024}
+  m_LocalScale: {x: 2.16, y: 1.79, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8308901286863356736}
@@ -1402,7 +1405,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

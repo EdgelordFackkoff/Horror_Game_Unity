@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Enemy_Knight : Enemy
@@ -15,10 +16,14 @@ public class Enemy_Knight : Enemy
     [SerializeField] public Light eye_light_2;
     [SerializeField] public Light armor_light;
     [SerializeField] public Enemy_Knight_Weapons knight_weapons;
-    [SerializeField] public float speed_0 = 1.2f;
-    [SerializeField] public float speed_1 = 1.4f;
-    [SerializeField] public float speed_2 = 1.6f;
-    [SerializeField] public float speed_3 = 1.8f;
+    [SerializeField] public float speed_0 = 1.6f;
+    [SerializeField] public float speed_1 = 1.8f;
+    [SerializeField] public float speed_2 = 1.9f;
+    [SerializeField] public float speed_3 = 1.5f;
+    [SerializeField] private Camera main_camera;
+    [SerializeField] private Plane[] cameraFrustum;
+    [SerializeField] private Collider collider_main;
+    [SerializeField] public bool camera_seen;
 
     // Start
     public override void Start()
@@ -30,6 +35,11 @@ public class Enemy_Knight : Enemy
         Player player = level.player;
         last_known_player_location = player.gameObject.transform.position;
         agent.avoidancePriority = UnityEngine.Random.Range(30, 60);
+
+        //Get main character from player
+        main_camera = player.main_camera;
+        //Set camera box
+        collider_main = collider_main.GetComponent<Collider>();
 
         //AUDIO
         move_sound_interval = 0.70f;
@@ -136,30 +146,64 @@ public class Enemy_Knight : Enemy
         //If not walking
         if (current_active_status == 3)
         {
-            //Walk boy
+            //Walk
             animator.SetBool("Walking", true);
-        }
 
+            //Now check exposure level
+            if (level.exposure_level < 3)
+            {
+                //Freeze animation
+                if (camera_seen == true)
+                {
+                    //Time top freeze animations
+                    animator.speed = 0.0f;
+                }
+                else
+                {
+                    //Unfreeze animations
+                    animator.speed = 1.0f;
+                }
+            }
+            else
+            {
+                //No freeze
+                //Unfreeze animations
+                animator.speed = 1.0f;
+            }
+        }
     }
 
     //Handle nvigation
     public override void Handle_Navigation()
     {
-
-    }
-
-    //Handle animation
-    public override void Handle_Behaviour()
-    {
-        //Some changes to test
-        if (level.exposure_level >= 1 && current_active_status == 0)
+        //Specific activation levels
+        //First detect if exposure is less than 3
+        if (level.exposure_level < 3)
         {
-            current_active_status = 1;
+            //Then check if they are seen
+            if (camera_seen == true)
+            {
+                //Disable movement
+                agent.enabled = false;
+
+                //Freeze Animation
+            }
+            //Camera doesn't see them
+            else
+            {
+                //If hunting state
+                if (current_active_status == 3)
+                {
+                    UpdatePlayer();
+                }
+            }
         }
-
-        if (level.exposure_level < 1 && current_active_status != 0)
+        //If it is equal to than 3
+        //Greater is failsafe
+        if (level.exposure_level >= 3)
         {
-            current_active_status = 0;
+            //Hunt player
+            UpdatePlayer();
         }
 
         //Change speed based on level
@@ -178,24 +222,21 @@ public class Enemy_Knight : Enemy
                 agent.speed = speed_3;
                 break;
         }
+    }
 
-        //Specific activation levels
-        //Hunting state
-        if (current_active_status == 3)
+    //Handle animation
+    public override void Handle_Behaviour()
+    {
+        //Some changes to test
+        if (level.exposure_level >= 1 && current_active_status == 0)
         {
-            agent.enabled = true;
-            //Set to player location
-            Player player = level.player;
-            agent.SetDestination(player.gameObject.transform.position);
-            //Turn towards player
-            //Calculate direction
-            Vector3 direction = player.gameObject.transform.position - transform.position;
-            direction.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 0.07f);
-
+            current_active_status = 1;
         }
 
+        if (level.exposure_level < 1 && current_active_status != 0)
+        {
+            current_active_status = 0;
+        }
     }
 
     public override void Handle_Audio()
@@ -203,15 +244,57 @@ public class Enemy_Knight : Enemy
         //Handle Footsteps
         if (current_active_status == 3 && Time.time > next_step_time)
         {
-            //Play footsteps
-            PlayFootstep();
-            next_step_time = Time.time + move_sound_interval;
+            //Check if it is level 3
+            if (level.exposure_level == 3)
+            {
+                //Play footsteps
+                PlayFootstep();
+                next_step_time = Time.time + move_sound_interval;
+            }
+            //If not level 3
+            else
+            {
+                //Check if they are seen
+                if (camera_seen == false)
+                {
+                    //Play footsteps
+                    PlayFootstep();
+                    next_step_time = Time.time + move_sound_interval;
+                }
+                else
+                {
+                    //Stop playing
+                    move_source.Stop();
+                }
+
+            }
+
         }
 
         //Handle Chatter
+        //Dummy bool
+        bool chatter = false;
         if (current_active_status >= 1)
         {
-            //Chatter
+            //Check if it is level 3
+            if (level.exposure_level == 3)
+            {
+                chatter = true;
+            }
+            else
+            {
+                //Check if not seen
+                if (camera_seen == false)
+                {
+                    chatter = true;
+                }
+            }
+        }
+
+        //Chatter
+        //Randomize it
+        if (chatter == true)
+        {
             if (Time.time >= chatter_nextchattertime)
             {
                 // Randomly decide whether to play a chatter sound
@@ -250,6 +333,35 @@ public class Enemy_Knight : Enemy
             default:
                 break;
         }
+
+        //Handle if camera sees them
+        cameraFrustum = GeometryUtility.CalculateFrustumPlanes(main_camera);
+        //Grab new collision bounds
+        var bounds = collider_main.bounds;
+        if (GeometryUtility.TestPlanesAABB(cameraFrustum,bounds))
+        {
+            camera_seen = true;
+        }
+        else
+        {
+            camera_seen = false;
+        }
+        
+    }
+
+    //AI
+    void UpdatePlayer()
+    {
+        agent.enabled = true;
+        //Set to player location
+        Player player = level.player;
+        agent.SetDestination(player.gameObject.transform.position);
+        //Turn towards player
+        //Calculate direction
+        Vector3 direction = player.gameObject.transform.position - transform.position;
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 0.07f);
     }
 
     //AUDIO
