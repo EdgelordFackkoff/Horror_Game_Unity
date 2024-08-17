@@ -3,7 +3,31 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|c:\\users\\user\\documents\\github\\horror_game_unity\\horror_game_unity\\assets\\scripts\\enemies\\librarian\\librarian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|c:\\users\\user\\documents\\github\\horror_game_unity\\horror_game_unity\\assets\\scripts\\menu\\buttongrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menu\\buttongrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\level\\level 3\\level3objective.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\level\\level 3\\level3objective.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|c:\\users\\user\\documents\\github\\horror_game_unity\\horror_game_unity\\assets\\scripts\\menu\\checkpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menu\\checkpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\level\\level 3\\level3objectivemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\level\\level 3\\level3objectivemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\dancer\\dancermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\dancer\\dancermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\dancer\\dancer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\dancer\\dancer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\librarian\\librarian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\librarian\\librarian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,12 +35,28 @@
       "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\level\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\level\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\level\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\level\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\knight\\enemy_knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\knight\\enemy_knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\enemy_animation_event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\enemy_animation_event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\enemies\\librarian\\librarianeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\librarian\\librarianeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\ui\\player_ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\player_ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1F7CD7C8-1EBD-57CD-214C-06848E418247}|Assembly-CSharp.csproj|C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\assets\\scripts\\environment\\flickerlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,72 +74,194 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Librarian.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD0AAAAFAAAA",
+              "DocumentIndex": 2,
+              "Title": "CheckPanel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Menu\\CheckPanel.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Menu\\CheckPanel.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Menu\\CheckPanel.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Menu\\CheckPanel.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwBkAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-14T01:14:58.352Z",
+              "WhenOpened": "2024-08-17T14:39:47.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ButtonGrow.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Menu\\ButtonGrow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Menu\\ButtonGrow.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Menu\\ButtonGrow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Menu\\ButtonGrow.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAQwC4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T13:29:42.375Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Level3Objective.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level 3\\Level3Objective.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Level\\Level 3\\Level3Objective.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level 3\\Level3Objective.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Level\\Level 3\\Level3Objective.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T13:13:42.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Level3ObjectiveManager.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level 3\\Level3ObjectiveManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Level\\Level 3\\Level3ObjectiveManager.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level 3\\Level3ObjectiveManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Level\\Level 3\\Level3ObjectiveManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T12:33:00.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DancerManager.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Dancer\\DancerManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Dancer\\DancerManager.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Dancer\\DancerManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Dancer\\DancerManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T12:07:25.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dancer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Dancer\\Dancer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Dancer\\Dancer.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Dancer\\Dancer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Dancer\\Dancer.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAIoAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T10:42:14.424Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Librarian.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Librarian\\Librarian.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T16:24:13.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LibrarianEditor.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\LibrarianEditor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Librarian\\LibrarianEditor.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Librarian\\LibrarianEditor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Librarian\\LibrarianEditor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T08:49:27.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Enemy_Knight.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Knight\\Enemy_Knight.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Knight\\Enemy_Knight.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Knight\\Enemy_Knight.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Knight\\Enemy_Knight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T16:25:49.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Enemy_Animation_Event.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Enemy_Animation_Event.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Enemy_Animation_Event.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Enemy_Animation_Event.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Enemy_Animation_Event.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T16:24:52.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Player_UI.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\UI\\Player_UI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\Player_UI.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\UI\\Player_UI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\Player_UI.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAuwHgAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T16:20:49.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Enemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Enemy.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Enemies\\Enemy.cs",
               "RelativeToolTip": "Assets\\Scripts\\Enemies\\Enemy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAHAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwCYAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-14T00:45:33.729Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Level.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Level\\Level.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Level\\Level.cs",
               "RelativeToolTip": "Assets\\Scripts\\Level\\Level.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFwAAAA2AAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwFwAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T08:34:52.151Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "FlickerLight.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Environment\\FlickerLight.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Environment\\FlickerLight.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Environment\\FlickerLight.cs",
               "RelativeToolTip": "Assets\\Scripts\\Environment\\FlickerLight.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwCAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T08:06:35.436Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Player\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Player.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Player\\Player.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\Player.cs",
-              "ViewState": "AQIAALsAAAAAAAAAAAAwwAoAAAA1AAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAwK4AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-12T16:34:44.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "MainMenu.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Horror_Game_Unity\\Horror_Game_Unity\\Assets\\Scripts\\Menu\\MainMenu.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Menu\\MainMenu.cs",
