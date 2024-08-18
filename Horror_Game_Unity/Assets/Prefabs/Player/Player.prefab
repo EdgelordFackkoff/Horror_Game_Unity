@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 7381349933561158329}
   - component: {fileID: 3063438787401383698}
   - component: {fileID: 3662555070625863519}
+  - component: {fileID: 7789844937427491036}
   m_Layer: 8
   m_Name: Damage_Hitbox
   m_TagString: Untagged
@@ -259,8 +260,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.45, y: 1.02, z: 0.45}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7789844937427491036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688406534946501061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e0c5f42a37299458bedc5aacde5857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  player: {fileID: 6829088069192463896}
+  active_layer: 14
 --- !u!1 &2950409723783121827
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +930,6 @@ GameObject:
   - component: {fileID: 2079989196051723782}
   - component: {fileID: 3970108763295404564}
   - component: {fileID: 5997054907248522112}
-  - component: {fileID: 5598808590982856330}
   m_Layer: 8
   m_Name: Interact_Hitbox
   m_TagString: Untagged
@@ -1023,33 +1038,6 @@ MonoBehaviour:
   type: 1
   player: {fileID: 6829088069192463896}
   active_layer: 7
---- !u!54 &5598808590982856330
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6277672453156487406}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!1 &6687053299650787594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1049,7 @@ GameObject:
   - component: {fileID: 4937246495795428161}
   - component: {fileID: 5470029051592758190}
   - component: {fileID: 6829088069192463896}
+  - component: {fileID: 1330906286575278921}
   m_Layer: 3
   m_Name: Player_Controller
   m_TagString: Untagged
@@ -1127,11 +1116,15 @@ MonoBehaviour:
   walk_speed: 3
   sprint_multipler: 3
   jump_force: 3
+  allow_input: 1
   mouse_sensitivity: 0
   up_down_range: 80
   mouse_x_input: Mouse X
   mouse_y_input: Mouse Y
   vertical_rotation: 0
+  temp_invul: 0
+  temp_invul_time: 2
+  attacked_lockduration: 0.8
   hitpoints: 100
   stamina: 100
   stamina_drain_rate: 15
@@ -1156,6 +1149,33 @@ MonoBehaviour:
   main_camera: {fileID: 3936853673514972761}
   damage_hitbox: {fileID: 2688406534946501061}
   interact_hitbox: {fileID: 6277672453156487406}
+--- !u!54 &1330906286575278921
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687053299650787594}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6903187084016267846
 GameObject:
   m_ObjectHideFlags: 0

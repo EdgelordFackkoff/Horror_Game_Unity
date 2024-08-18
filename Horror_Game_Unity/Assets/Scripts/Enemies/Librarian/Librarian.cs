@@ -135,6 +135,12 @@ public class Librarian : Enemy
     {
 
     }
+
+    public override void Handle_Attack()
+    {
+
+    }
+
     public override void Handle_Misc()
     {
 

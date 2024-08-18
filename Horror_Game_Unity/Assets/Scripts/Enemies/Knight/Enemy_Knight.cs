@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Enemy_Knight : Enemy
@@ -16,10 +17,10 @@ public class Enemy_Knight : Enemy
     [SerializeField] public Light eye_light_2;
     [SerializeField] public Light armor_light;
     [SerializeField] public Enemy_Knight_Weapons knight_weapons;
-    [SerializeField] public float speed_0 = 1.6f;
-    [SerializeField] public float speed_1 = 1.8f;
-    [SerializeField] public float speed_2 = 1.9f;
-    [SerializeField] public float speed_3 = 1.5f;
+    [SerializeField] public float speed_0 = 1.8f;
+    [SerializeField] public float speed_1 = 2.0f;
+    [SerializeField] public float speed_2 = 2.2f;
+    [SerializeField] public float speed_3 = 1.8f;
     [SerializeField] private Camera main_camera;
     [SerializeField] private Plane[] cameraFrustum;
     [SerializeField] private Collider collider_main;
@@ -32,6 +33,7 @@ public class Enemy_Knight : Enemy
         agent.enabled = false;
 
         //Setup
+        can_attack = false;
         Player player = level.player;
         last_known_player_location = player.gameObject.transform.position;
         agent.avoidancePriority = UnityEngine.Random.Range(30, 60);
@@ -72,8 +74,9 @@ public class Enemy_Knight : Enemy
         {
             //Deactivate NavMesh
             agent.enabled = false;
+            //Unfreeze Animation                   
+            animator.speed = 1.0f;
 
-            UnityEngine.Debug.Log("Not Idling(Inactive)");
             //If already playing
             if (!anim_info.IsName("Inactive_idle"))
             {
@@ -86,17 +89,17 @@ public class Enemy_Knight : Enemy
                         //If  finished switch around
                         animator.SetBool("Inactive", true);
                         animator.SetBool("Becoming_InActive", false);
-                        UnityEngine.Debug.Log("Deactivated");
+                        //UnityEngine.Debug.Log("Deactivated");
                     }
                     else
                     {
-                        UnityEngine.Debug.Log("Still Deactivating");
+                        //UnityEngine.Debug.Log("Still Deactivating");
                     }
                 }
 
                 else
                 {
-                    UnityEngine.Debug.Log("Deactivating");
+                   // UnityEngine.Debug.Log("Deactivating");
                     animator.SetBool("Walking", false);
                     animator.SetBool("Active", false);
                     animator.SetBool("Becoming_InActive", true);
@@ -114,7 +117,7 @@ public class Enemy_Knight : Enemy
         {
             if (!anim_info.IsName("Active_idle") && !anim_info.IsName("Walk_Loop"))
             {
-                UnityEngine.Debug.Log("Not Idling");
+                //UnityEngine.Debug.Log("Not Idling");
                 //See if activating animation is playing
                 if (anim_info.IsName("Become_Active"))
                 {
@@ -125,21 +128,69 @@ public class Enemy_Knight : Enemy
                         animator.SetBool("Inactive", false);
                         animator.SetBool("Active", true);
                         animator.SetBool("Becoming_Active", false);
-                        UnityEngine.Debug.Log("Activated");
+                        //UnityEngine.Debug.Log("Activated");
                         //Set hunting state
                         current_active_status = 3;
+                        can_attack = true;
                     }
                     else
                     {
-                        UnityEngine.Debug.Log("Still Activating");
+                        //UnityEngine.Debug.Log("Still Activating");
                     }
                 }
                 else
                 {
                     animator.SetBool("Inactive", false);
                     animator.SetBool("Becoming_Active", true);
-                    UnityEngine.Debug.Log("Becoming Activated");
+                    //UnityEngine.Debug.Log("Becoming Activated");
                 }
+            }
+            if (anim_info.IsName("Active_idle"))
+            {
+                //Proceed to status 3
+                current_active_status = 3;
+            }
+        }
+        
+        //If not attacking
+        if (current_active_status == 2)
+        {
+            //Unfreeze Animation                   
+            animator.speed = 1.0f;
+            //Remove navigation
+            agent.enabled = false;
+            //Check if attacking already
+            if (anim_info.IsName("Attack"))
+            {
+                //Check if finished
+                if (anim_info.normalizedTime >= 1.0f)
+                {
+                    //Walkround
+                    Vector3 rotation = transform.rotation.eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
+                    //Play sound
+                    knight_weapons.playHitSound();
+                    UnityEngine.Debug.Log("Finished Attacking");
+                    //If finished switch around
+                    animator.SetBool("Attacking", false);
+                    animator.SetBool("Walking", false);
+                    //Set back to idle state
+                    current_active_status = 1;
+                    isattacking = false;
+                    can_attack = true;
+                }
+            }
+            else
+            {
+                animator.SetBool("Attacking", true);
+                animator.SetBool("Walking", false);
+                UnityEngine.Debug.Log("Start Attacking");
+                //Turn towards player
+                Player player = level.player;
+                transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+                //Walkround
+                Vector3 rotation = transform.rotation.eulerAngles;
+                transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
             }
         }
 
@@ -149,8 +200,8 @@ public class Enemy_Knight : Enemy
             //Walk
             animator.SetBool("Walking", true);
 
-            //Now check exposure level
-            if (level.exposure_level < 3)
+            //Now check exposure level and if attacking
+            if (level.exposure_level < 3 && isattacking == false)
             {
                 //Freeze animation
                 if (camera_seen == true)
@@ -177,8 +228,8 @@ public class Enemy_Knight : Enemy
     public override void Handle_Navigation()
     {
         //Specific activation levels
-        //First detect if exposure is less than 3
-        if (level.exposure_level < 3)
+        //First detect if exposure is less than 3 and not attacking
+        if (level.exposure_level < 3 && current_active_status != 2)
         {
             //Then check if they are seen
             if (camera_seen == true)
@@ -191,19 +242,34 @@ public class Enemy_Knight : Enemy
             //Camera doesn't see them
             else
             {
-                //If hunting state
-                if (current_active_status == 3)
+                //If hunting state and not attacking
+                if (current_active_status == 3 && current_active_status != 2)
                 {
                     UpdatePlayer();
+                    can_attack = true;
                 }
             }
         }
+        //If attacking
+        if (current_active_status == 2)
+        {
+            //Disable movement
+            agent.enabled = false;
+            can_attack = false;
+        }
+
         //If it is equal to than 3
         //Greater is failsafe
-        if (level.exposure_level >= 3)
+        if (level.exposure_level >= 3 && current_active_status != 2)
         {
-            //Hunt player
-            UpdatePlayer();
+            //Check if attacking
+            if (isattacking == false)
+            {
+                //Hunt player
+                UpdatePlayer();
+                can_attack = true;
+            }
+
         }
 
         //Change speed based on level
@@ -237,6 +303,13 @@ public class Enemy_Knight : Enemy
         {
             current_active_status = 0;
         }
+
+        //Workaround
+        if (current_active_status == 0)
+        {
+            can_attack = false;
+        }
+
     }
 
     public override void Handle_Audio()
@@ -269,6 +342,11 @@ public class Enemy_Knight : Enemy
 
             }
 
+        }
+        if (current_active_status != 3)
+        {
+            //Stop playing
+            move_source.Stop();
         }
 
         //Handle Chatter
@@ -306,6 +384,18 @@ public class Enemy_Knight : Enemy
                 // Set the time for the next possible chatter sound
                 chatter_nextchattertime = Time.time + UnityEngine.Random.Range(chatter_mininterval, chatter_maxinterval);
             }
+        }
+    }
+
+    //Attack
+    public override void Handle_Attack()
+    {
+        if (isattacking == true)
+        {
+            //Set state to 2
+            current_active_status = 2;
+            UnityEngine.Debug.Log("State 2");
+            can_attack = false;
         }
     }
 

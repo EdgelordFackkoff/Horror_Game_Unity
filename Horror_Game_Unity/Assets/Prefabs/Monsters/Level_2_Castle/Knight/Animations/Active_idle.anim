@@ -1470,7 +1470,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0, y: -0.027, z: 0}
+        value: {x: 0, y: -0.027, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -7486,7 +7486,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7579,7 +7579,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7591,7 +7591,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7603,7 +7603,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7615,7 +7615,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/leg1_r/leg2_r/foot_r
+    path: Armature/leg1_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7627,7 +7627,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/leg1_r/leg2_r/foot_r
+    path: Armature/leg1_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7639,7 +7639,43 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/leg1_r/leg2_r/foot_r
+    path: Armature/leg1_r
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7831,7 +7867,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7843,7 +7879,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7855,7 +7891,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7867,7 +7903,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7879,7 +7915,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7891,7 +7927,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7903,7 +7939,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
+    path: Armature/leg1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7915,7 +7951,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
+    path: Armature/leg1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7927,7 +7963,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r
+    path: Armature/leg1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8047,7 +8083,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/leg1_r
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8059,7 +8095,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/leg1_r
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8071,7 +8107,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/leg1_r
+    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/thumb1_l
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8083,7 +8119,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
+    path: Armature/leg1_r/leg2_r/foot_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8095,7 +8131,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
+    path: Armature/leg1_r/leg2_r/foot_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8107,7 +8143,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_l/shoulder2_l
+    path: Armature/leg1_r/leg2_r/foot_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8515,7 +8551,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8527,7 +8563,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8539,7 +8575,31 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_l/arm1_l/arm3_l/hand_l/finger1_l/finger2_l
+    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8551,67 +8611,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/leg1_l
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Armature/leg1_l
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Armature/leg1_l
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Armature/spine1/spine2/spine3/shoulder_r/arm1_r/arm3_r/hand_r/Weapon_Slot
+    path: Armature/spine1/spine2/spine3/shoulder_r/shoulder2_r/shoulder3_r
     classID: 4
     script: {fileID: 0}
     flags: 0

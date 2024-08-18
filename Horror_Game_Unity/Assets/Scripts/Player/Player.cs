@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
 using System.Threading;
@@ -14,8 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float jump_force = 3.0f;
     //This will not change
     private float gravity;
- 
+
     [Header("Input")]
+    [SerializeField] private bool allow_input = true;
     [SerializeField] private float mouse_sensitivity;
     [SerializeField] private float up_down_range = 80.0f;
     private string horizontal_move_input;
@@ -29,6 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float vertical_rotation;
 
     [Header("Gameplay")]
+    [SerializeField] private bool temp_invul = false;
+    [SerializeField] private int temp_invul_time = 2;
+    [SerializeField] private float attacked_lockduration = 0.8f;
     [SerializeField] private float hitpoints = 100f;
     [SerializeField] private float stamina = 100f;
     [SerializeField] private float stamina_drain_rate = 15.00f;
@@ -100,11 +105,15 @@ public class Player : MonoBehaviour
     //update
     private void Update()
     {
-        HandleMovement();
-        HandleRotation();
-        HandleFootsteps();
+        //Check input allowed
+        if (allow_input == true)
+        {
+            HandleMovement();
+            HandleRotation();
+            HandleFootsteps();
+            HandleInteract();
+        }
         HandleHealthStamina();
-        HandleInteract();
         //Give UI can sprint or not info
         player_ui.SetSprintAllowed(can_sprint);
     }
@@ -368,5 +377,80 @@ public class Player : MonoBehaviour
         last_played_footstep = random_index;
         footstep_source.clip = footstep_sounds[random_index];
         footstep_source.Play();
+    }
+
+    //Getting attacked
+    public void Attacked(Enemy enemy)
+    {
+        //Check if invul false
+        if (temp_invul == false)
+        {
+            //Activate temp invul
+            temp_invul = true;
+
+            //Lock input
+            allow_input = false;
+
+            // Capture the player's original rotation
+            Quaternion original_rotation = character_controller.transform.rotation;
+
+            // Calculate the direction vector from the camera to the target
+            Vector3 direction = enemy.eye_level.position - character_controller.transform.position;
+
+            // Calculate the target rotation to face the enemy's eye level
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            // Smoothly rotate the camera to face the target
+            character_controller.transform.rotation = Quaternion.Slerp(character_controller.transform.rotation, targetRotation, 0.5f * Time.deltaTime);
+
+            //Make attacking true for enemy
+            enemy.isAttacking_true();
+            StartCoroutine(Lockattack(enemy, original_rotation, targetRotation));
+        }
+    }
+
+    IEnumerator Lockattack(Enemy enemy, Quaternion originalRotation, Quaternion targetRotation)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < attacked_lockduration)
+        {
+            //Rotate player towards enemy
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, elapsedTime / attacked_lockduration);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        //Get damaged
+        float enemy_damage = enemy.get_damage();
+        TakeDamage(enemy_damage);
+
+        //Return to original rotation
+        elapsedTime = 0f;
+        while (elapsedTime < attacked_lockduration)
+        {
+            // Rotate player towards enemy
+            transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, elapsedTime / attacked_lockduration);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        //Reenable character input and movement
+        allow_input = true;
+        //Start countdown for invul
+        StartCoroutine(Invul_cooldown());
+    }
+
+    IEnumerator Invul_cooldown()
+    {
+        for (int i = temp_invul_time; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+        UnityEngine.Debug.Log("Invul over");
+        temp_invul = false;
     }
 }

@@ -31,8 +31,16 @@ public class Enemy_Knight_Weapons : MonoBehaviour
                 polearms_list[i].SetActive(false);
             }
         }
+
+        //Assign polearm sound
+        polearm_hit.clip = polearms_sounds[random];
     }
 
+    public void playHitSound()
+    {
+        polearm_hit.Play();
+    }
+    
     // Update is called once per frame
     void Update()
     {
