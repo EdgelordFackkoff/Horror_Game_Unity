@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private float gravity;
 
     [Header("Input")]
-    [SerializeField] private bool allow_input = true;
+    [SerializeField] public bool allow_input = true;
     [SerializeField] private float mouse_sensitivity;
     [SerializeField] private float up_down_range = 80.0f;
     private string horizontal_move_input;

@@ -8,8 +8,8 @@ public class CheckPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     public VerticalLayoutGroup panel;
 
-    private float original_spacing;
-    private float offset = 30f;
+    public float original_spacing;
+    public float offset = 30f;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class CheckPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         while (timer < duration)
         {
             panel.spacing = Mathf.Lerp(startS, endS, timer / duration);
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
         panel.spacing = endS;
