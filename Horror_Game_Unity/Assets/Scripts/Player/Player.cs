@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool can_sprint = true;
     [SerializeField] private bool is_interacting = false;
     [SerializeField] private Interactable current_interacting;
+    [SerializeField] public bool player_alive = true;
 
     [Header("Audio")]
     [Header("Game Music")]
@@ -60,6 +61,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float sprint_interval = 0.3f;
     [SerializeField] private float velocity_threshold = 2.0f;
 
+    [Header("Camera")]
+    //Main Camera control
+    [SerializeField] public GameObject camera_attachment;
+    [SerializeField] public Transform camera_attachment_initial_position;
+    [SerializeField] public Camera main_camera;
+    [SerializeField] public bool attacked_camera_shaking;
+
+
     //Current movement
     //Starts with none
     private Vector3 current_movement = Vector3.zero;
@@ -75,8 +84,6 @@ public class Player : MonoBehaviour
     //Player UI variable
     public Canvas player_canvas;
     private Player_UI player_ui;
-    //Main Camera control
-    public Camera main_camera;
     public GameObject damage_hitbox;
     public GameObject interact_hitbox;
     //Level variable
@@ -91,6 +98,8 @@ public class Player : MonoBehaviour
         player_ui = player_canvas.GetComponent<Player_UI>();
         //Get gravity
         gravity = level.gravity;
+        //Reference initial camera_attachment position grab
+        camera_attachment_initial_position = camera_attachment.transform;
 
         //Run update input
         UpdateInputs();
@@ -106,7 +115,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         //Check input allowed
-        if (allow_input == true)
+        if (allow_input == true && player_alive == true)
         {
             HandleMovement();
             HandleRotation();
@@ -339,10 +348,28 @@ public class Player : MonoBehaviour
     //DAMAGE
     public void TakeDamage(float damage)
     {
-        //Get hit
-        hitpoints -= damage;
-        hitpoints = Mathf.Clamp(hitpoints, 0, 100);
-        player_ui.ResetHealthLerp();
+        //Check if damage is fatal
+        if (hitpoints - damage <= 0)
+        {
+            //Fatal damage
+            //Die
+            hitpoints = 0;
+            allow_input = false;
+            temp_invul = false;
+            player_ui.ResetHealthLerp();
+            player_alive = false;
+            current_interacting = null;
+            //Tell UI to begin death animation
+            player_ui.player_death();
+
+        }
+        else
+        {
+            //Get hit
+            hitpoints -= damage;
+            hitpoints = Mathf.Clamp(hitpoints, 0, 100);
+            player_ui.ResetHealthLerp();
+        }
     }
 
     //HEAL
@@ -383,13 +410,17 @@ public class Player : MonoBehaviour
     public void Attacked(Enemy enemy)
     {
         //Check if invul false
-        if (temp_invul == false)
+        if (temp_invul == false && player_alive == true)
         {
             //Activate temp invul
             temp_invul = true;
 
             //Lock input
             allow_input = false;
+
+            //Cancel sprint
+            is_sprinting = false;
+
 
             // Capture the player's original rotation
             Quaternion original_rotation = character_controller.transform.rotation;
@@ -409,6 +440,69 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void CameraAttackedShake(Vector3 targetRotation, float attackedMoveDuration, float attackedShakeMagnitude, float attackedShakeFrequency)
+    {
+        // Set camera to shaking
+        attacked_camera_shaking = true;
+        StartCoroutine(CameraShakeMove(targetRotation, attackedMoveDuration, attackedShakeMagnitude, attackedShakeFrequency));
+    }
+
+    IEnumerator CameraShakeMove(Vector3 targetRotation, float attackedMoveDuration, float attackedShakeMagnitude, float attackedShakeFrequency)
+    {
+        Quaternion initialRotation = camera_attachment_initial_position.localRotation;
+        Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
+
+        Vector3 initialPosition = camera_attachment.transform.localPosition;
+
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < attackedMoveDuration)
+        {
+            // Interpolate towards the target rotation
+            camera_attachment.transform.localRotation = Quaternion.Slerp(initialRotation, targetQuaternion, elapsedTime / attackedMoveDuration);
+
+            // Apply shake effect to position
+            float shakeOffsetX = Mathf.PerlinNoise(Time.time * attackedShakeFrequency, 0) * 2f * attackedShakeMagnitude - attackedShakeMagnitude;
+            float shakeOffsetY = Mathf.PerlinNoise(0, Time.time * attackedShakeFrequency) * 2f * attackedShakeMagnitude - attackedShakeMagnitude;
+            float shakeOffsetZ = Mathf.PerlinNoise(Time.time * attackedShakeFrequency, Time.time * attackedShakeFrequency) * 2f * attackedShakeMagnitude - attackedShakeMagnitude;
+
+            camera_attachment.transform.localPosition = initialPosition + new Vector3(shakeOffsetX, shakeOffsetY, shakeOffsetZ);
+
+            // Increment the elapsed time
+            elapsedTime += Time.deltaTime;
+
+            // Optionally, dampen the shake magnitude over time
+            attackedShakeMagnitude = Mathf.Lerp(attackedShakeMagnitude, 0f, elapsedTime / attackedMoveDuration);
+
+            yield return null;
+        }
+
+        // Ensure the camera_attachment is exactly at the target rotation and initial position
+        camera_attachment.transform.localRotation = targetQuaternion;
+        camera_attachment.transform.localPosition = initialPosition;
+
+        // Pause briefly before returning to the original rotation
+        yield return new WaitForSeconds(0.3f);
+
+        // Return to original rotation and position
+        elapsedTime = 0f;
+        while (elapsedTime < attackedMoveDuration + 0.7)
+        {
+            camera_attachment.transform.localRotation = Quaternion.Slerp(targetQuaternion, initialRotation, elapsedTime / attackedMoveDuration);
+            camera_attachment.transform.localPosition = initialPosition;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the camera_attachment is exactly at the original rotation and position
+        camera_attachment.transform.localRotation = initialRotation;
+        camera_attachment.transform.localPosition = initialPosition;
+
+        // Reset shake magnitude and state
+        attacked_camera_shaking = false;
+    }
+
     IEnumerator Lockattack(Enemy enemy, Quaternion originalRotation, Quaternion targetRotation)
     {
         float elapsedTime = 0f;
@@ -422,9 +516,14 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
+        main_camera.transform.LookAt(enemy.eye_level.transform);
+
         //Get damaged
         float enemy_damage = enemy.get_damage();
         TakeDamage(enemy_damage);
+
+        //Show shield
+        player_ui.show_hide_shield(1);
 
         //Return to original rotation
         elapsedTime = 0f;
@@ -436,6 +535,8 @@ public class Player : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        main_camera.transform.rotation = originalRotation;
 
         //Reenable character input and movement
         allow_input = true;
@@ -450,7 +551,9 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        UnityEngine.Debug.Log("Invul over");
+        //UnityEngine.Debug.Log("Invul over");
+        //Hide shield
+        player_ui.show_hide_shield(0);
         temp_invul = false;
     }
 }

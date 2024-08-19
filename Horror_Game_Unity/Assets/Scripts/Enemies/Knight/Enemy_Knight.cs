@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -13,6 +14,8 @@ public class Enemy_Knight : Enemy
     //0 is inactive
     //1 is active
     [SerializeField] private int current_active_status = 0;
+    //Set to level it actives on
+    [SerializeField] private int activation_level;
     [SerializeField] public Light eye_light_1;
     [SerializeField] public Light eye_light_2;
     [SerializeField] public Light armor_light;
@@ -51,6 +54,11 @@ public class Enemy_Knight : Enemy
         chatter_playchance = 0.25f;
         chatter_nextchattertime = 0f;
 
+        //Camera Effects
+        targetRotation = new Vector3(-15f, 0f, 0f);
+        attacked_move_duration = 1.0f;
+        attacked_shake_magnitude = 0.1f;
+        attacked_shake_frequency = 5f;
     }
 
     //Activate or Deactivae Knight
@@ -162,6 +170,14 @@ public class Enemy_Knight : Enemy
             //Check if attacking already
             if (anim_info.IsName("Attack"))
             {
+                //Special case
+                if (anim_info.normalizedTime >= 0.60f && anim_info.normalizedTime <= 0.90f)
+                {
+                    //Apply camera shake
+                    Player player = level.player;
+                    player.CameraAttackedShake(targetRotation, attacked_move_duration, attacked_shake_magnitude, attacked_shake_frequency);
+                }
+
                 //Check if finished
                 if (anim_info.normalizedTime >= 1.0f)
                 {
@@ -294,12 +310,12 @@ public class Enemy_Knight : Enemy
     public override void Handle_Behaviour()
     {
         //Some changes to test
-        if (level.exposure_level >= 1 && current_active_status == 0)
+        if (level.exposure_level <= activation_level && current_active_status == 0)
         {
             current_active_status = 1;
         }
 
-        if (level.exposure_level < 1 && current_active_status != 0)
+        if (level.exposure_level < activation_level && current_active_status != 0)
         {
             current_active_status = 0;
         }
@@ -424,19 +440,56 @@ public class Enemy_Knight : Enemy
                 break;
         }
 
-        //Handle if camera sees them
+        // Define a layer mask for the environment layer (layer 11)
+        int environmentLayerMask = 1 << 11;
+
+        // Handle if camera sees them
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(main_camera);
-        //Grab new collision bounds
         var bounds = collider_main.bounds;
-        if (GeometryUtility.TestPlanesAABB(cameraFrustum,bounds))
+
+        if (GeometryUtility.TestPlanesAABB(cameraFrustum, bounds))
         {
-            camera_seen = true;
+            // Calculate the center point of the enemy's collider
+            Vector3 enemyCenter = bounds.center;
+
+            // Raycast from the camera to the center of the enemy's collider
+            Vector3 directionToEnemy = enemyCenter - main_camera.transform.position;
+            float distanceToEnemy = directionToEnemy.magnitude;
+            Ray ray = new Ray(main_camera.transform.position, directionToEnemy.normalized);
+
+            // Draw the ray in the scene view for debugging (optional)
+            UnityEngine.Debug.DrawRay(ray.origin, ray.direction * distanceToEnemy, Color.red, 2f);
+            //4UnityEngine.Debug.Log("Collider main: " + collider_main.name);
+
+            // Perform the raycast with the environment layer mask
+            if (Physics.Raycast(ray, out RaycastHit hit, distanceToEnemy, environmentLayerMask))
+            {
+                // Debug log for raycast hit details
+                //UnityEngine.Debug.Log("Raycast hit: " + hit.collider.name + ", Distance: " + hit.distance);
+
+                if (hit.collider == collider_main)
+                {
+                    //UnityEngine.Debug.Log("Enemy is in frustum and visible");
+                    camera_seen = true;
+                }
+                else
+                {
+                    //UnityEngine.Debug.Log("Enemy is in frustum but obstructed by: " + hit.collider.name);
+                    camera_seen = false;
+                }
+            }
+            else
+            {
+                //UnityEngine.Debug.Log("Enemy is in frustum with a direct line of sight");
+                camera_seen = true;
+            }
         }
         else
         {
+            //UnityEngine.Debug.Log("Enemy is not in frustum");
             camera_seen = false;
         }
-        
+
     }
 
     //AI

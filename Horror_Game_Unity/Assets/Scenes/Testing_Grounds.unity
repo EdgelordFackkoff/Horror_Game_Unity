@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: level
       value: 
       objectReference: {fileID: 1141296305}
+    - target: {fileID: 3464202130825097638, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
+      propertyPath: activation_level
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3496596804911388847, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
       propertyPath: m_Name
       value: Knight_00 (2)
@@ -722,13 +726,13 @@ PrefabInstance:
       propertyPath: level
       value: 
       objectReference: {fileID: 1141296305}
+    - target: {fileID: 3464202130825097638, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
+      propertyPath: activation_level
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3496596804911388847, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
       propertyPath: m_Name
       value: Knight_00
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323813947230807691, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
-      propertyPath: m_Constraints
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8308901286863356736, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2499,6 +2503,10 @@ PrefabInstance:
       propertyPath: level
       value: 
       objectReference: {fileID: 1141296305}
+    - target: {fileID: 3464202130825097638, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
+      propertyPath: activation_level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3496596804911388847, guid: 1877dbb98355be5469b0c45c88ef3662, type: 3}
       propertyPath: m_Name
       value: Knight_00 (1)

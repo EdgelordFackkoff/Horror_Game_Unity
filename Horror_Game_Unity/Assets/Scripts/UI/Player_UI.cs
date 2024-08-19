@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.Versioning;
+using System.ComponentModel.Design;
 
 public class Player_UI : MonoBehaviour
 {
@@ -17,32 +18,41 @@ public class Player_UI : MonoBehaviour
     [SerializeField] private float max_stamina = 100f;
     [SerializeField] private float bar_health_chipSpeed = 2.0f;
     [SerializeField] private float bar_stamina_chipSpeed = 6.0f;
-    //Reference Healthbars
-    public Image front_healthbar;
-    public Image back_healthbar;
-    //Reference Stamina Bars
-    public Image front_staminabar;
-    public Image back_staminabar;
-    //For chip effect
-    public float lerp_timer_health;
-    public float lerp_timer_stamina;
-    //To detect changes
-    private float last_health;
-    private float last_stamina;
-    private bool stamina_can_sprint;
 
+    [Header("References")]
+    [Header("Health Bar")]
+    [SerializeField] public GameObject main_UI;
+    //Reference Healthbars
+    [SerializeField] public Image front_healthbar;
+    [SerializeField] public Image back_healthbar;
+    [SerializeField] public Image invul_shield;
+    [SerializeField] public float lerp_timer_health;
+    [SerializeField] public float lerp_timer_stamina;
+    [Header("Stamina Bar")]
+    //Reference Stamina Bars
+    [SerializeField] public Image front_staminabar;
+    [SerializeField] public Image back_staminabar;
+    [SerializeField] private float last_health;
+    [SerializeField] private float last_stamina;
+    [SerializeField] private bool stamina_can_sprint;
+    [Header("Death Screen")]
+    //Reference Death Screen
+    [SerializeField] public GameObject death_screen_UI;
+    [SerializeField] public Image black_screen;
+    [SerializeField] public float black_screen_fade_duration = 1f;
     [Header("Exposure")]
-    public Slider exposure_meter;
-    public TMP_Text TMP_exposure_level;
-    //To detect changes
-    private int exposure_level_last = 0;
-    private float exposure_amount_last = 0.0f;
-    public TMP_Text TMP_exposure_increase_alert;
-    public TMP_Text TMP_exposure_decrease_alert;
+    [SerializeField] public Slider exposure_meter;
+    [SerializeField] public TMP_Text TMP_exposure_level;
+    [SerializeField] private int exposure_level_last = 0;
+    [SerializeField] private float exposure_amount_last = 0.0f;
+    [SerializeField] public GameObject exposure_alert_UI;
+    [SerializeField] public TMP_Text TMP_exposure_increase_alert;
+    [SerializeField] public TMP_Text TMP_exposure_decrease_alert;
     [SerializeField] private string exposure_alert_increase = "EXPOSURE LEVEL INCREASED";
     [SerializeField] private string exposure_alert_decrease = "EXPOSURE LEVEL DECREASED";
 
     [Header("Interact")]
+    [SerializeField] public GameObject interact_UI;
     public TMP_Text TMP_interact_text;
     public TMP_Text TMP_interact_name;
     public TMP_Text TMP_interact_desc;
@@ -79,6 +89,8 @@ public class Player_UI : MonoBehaviour
 
         //Hide slider
         interact_bar.gameObject.SetActive(false);
+        //Hide shield
+        invul_shield.gameObject.SetActive(false);
     }
 
     public void UpdateUIHealthStamina(float current_health, float current_stamina)
@@ -390,6 +402,38 @@ public class Player_UI : MonoBehaviour
         }
     }
 
+    public void show_hide_shield(int x)
+    {
+        switch (x)
+        {
+            case 0:
+                //Hide shield
+                invul_shield.gameObject.SetActive(false);
+                break;
+            case 1:
+                //Show shield
+                invul_shield.gameObject.SetActive(true);
+                break;
+            default:
+                //Not supposed to be here
+                break;
+        }
+    }
+
+    public void player_death()
+    {
+        //Disable everything
+        //Health, Stamina, Exposure
+        main_UI.gameObject.SetActive(false);
+        exposure_alert_UI.gameObject.SetActive(false);
+        interact_UI.gameObject.SetActive(false);
+
+        //Set death screen active
+        death_screen_UI.gameObject.SetActive(true);
+        //Fade into existence
+        StartCoroutine(fade_from_black());
+    }
+
     //Exposure Alert cooldown
     IEnumerator alert_cooldown(int x)
     {
@@ -409,5 +453,27 @@ public class Player_UI : MonoBehaviour
         {
             TMP_exposure_decrease_alert.text = " ";
         }
+    }
+
+    //Fade into Black
+    IEnumerator fade_from_black()
+    {
+        //Black screen first
+        float elapsedTime = 0f;
+        Color color = black_screen.color;
+
+        while (elapsedTime < black_screen_fade_duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / black_screen_fade_duration);
+            color.a = alpha;
+            black_screen.color = color;
+            yield return null;
+        }
+
+        // Ensure final value is set
+        color.a = 1f;
+        black_screen.color = color;
+        //Done
     }
 }

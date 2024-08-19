@@ -16,7 +16,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected bool isattacking = false;    
     [SerializeField] public bool can_attack = true;
     [SerializeField] protected Vector3 last_known_player_location;
-    [SerializeField] public Transform eye_level;
 
     [Header("Audio")]
     [SerializeField] protected AudioSource move_source;
@@ -32,10 +31,17 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float chatter_nextchattertime;
     [SerializeField] protected float chatter_last_played_chatter_sound = -1;
 
+    [Header("Camera Effects")]
+    [SerializeField] public Vector3 targetRotation;
+    [SerializeField] public float attacked_move_duration;
+    [SerializeField] public float attacked_shake_magnitude;
+    [SerializeField] public float attacked_shake_frequency;
+
     [Header("References")] // Get exposure
-    public Level level;
-    public Animator animator;
-    public GameObject damage_box;
+    [SerializeField] public Level level;
+    [SerializeField] public Animator animator;
+    [SerializeField] public GameObject damage_box;
+    [SerializeField] public Transform eye_level;
 
 
     //For overrides
