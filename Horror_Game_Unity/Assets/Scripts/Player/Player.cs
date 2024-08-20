@@ -89,9 +89,16 @@ public class Player : MonoBehaviour
     //Level variable
     private Level level;
 
+    //AWake
+    void Awake()
+    {
+        allow_input = true;
+    }
+
     //start
     private void Start()
     {
+
         //Reference Level
         level = GetComponentInParent<Level>();
         //Reference Player UI Script
@@ -369,6 +376,8 @@ public class Player : MonoBehaviour
             hitpoints -= damage;
             hitpoints = Mathf.Clamp(hitpoints, 0, 100);
             player_ui.ResetHealthLerp();
+            //UI damage frame
+            player_ui.Damage_RedFrame();
         }
     }
 
@@ -437,6 +446,9 @@ public class Player : MonoBehaviour
             //Make attacking true for enemy
             enemy.isAttacking_true();
             StartCoroutine(Lockattack(enemy, original_rotation, targetRotation));
+
+            //Temporarily allow vulerable
+            Physics.IgnoreLayerCollision(3, 15, true);
         }
     }
 
@@ -555,5 +567,8 @@ public class Player : MonoBehaviour
         //Hide shield
         player_ui.show_hide_shield(0);
         temp_invul = false;
+
+        //Reallow vulerable
+        Physics.IgnoreLayerCollision(3, 15, false);
     }
 }

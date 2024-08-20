@@ -146,6 +146,11 @@ public class Librarian : Enemy
 
     }
 
+    public override void Handle_Paused()
+    {
+
+    }
+
     public Vector3 RandomNavMeshPosition(float radius, Vector3 pos)
     {
         Vector3 randomDir = Random.insideUnitSphere * radius;

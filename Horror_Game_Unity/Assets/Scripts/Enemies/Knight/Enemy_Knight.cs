@@ -415,6 +415,12 @@ public class Enemy_Knight : Enemy
         }
     }
 
+    public override void Handle_Paused()
+    {
+        //Stop playing audio
+        move_source.Stop();
+    }
+
     //Handle 
     public override void Handle_Misc()
     {

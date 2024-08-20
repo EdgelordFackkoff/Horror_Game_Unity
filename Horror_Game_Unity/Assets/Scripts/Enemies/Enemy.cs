@@ -52,19 +52,24 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Handle_Audio();
     public abstract void Handle_Attack();
     public abstract void Handle_Misc();
+    public abstract void Handle_Paused();
 
     //Update
     void Update()
     {
-        Handle_Behaviour();
-        Handle_Animation();
-        Handle_Navigation();
-        Handle_Audio();
-        Handle_Attack();
-        Handle_Misc();
-
-        //Since no Rigidbody use articifal gravity
-
+        if (level.paused)
+        {
+            Handle_Paused();
+        }
+        else
+        {
+            Handle_Behaviour();
+            Handle_Animation();
+            Handle_Navigation();
+            Handle_Audio();
+            Handle_Attack();
+            Handle_Misc();
+        }
     }
 
     //Grabs

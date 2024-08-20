@@ -126,6 +126,11 @@ public class Dancer : Enemy
 
     }
 
+    public override void Handle_Paused()
+    {
+
+    }
+
     private IEnumerator MusicChecker()
     {
         while (true)

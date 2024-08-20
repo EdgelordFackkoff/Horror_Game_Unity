@@ -8,6 +8,7 @@ public class Level : MonoBehaviour
     [Header("Game State")]
     //Initially false
     public bool paused = false;
+    public int level_int;
 
     [Header("Exposure")]
     public int exposure_level = 0;
@@ -18,16 +19,17 @@ public class Level : MonoBehaviour
     private int last_exposure_level = 0;
 
     [Header("Input")]
-    public float mouse_sensitivity = 2.0f;
-    public string horizontal_move_input = "Horizontal";
-    public string vertical_move_input = "Vertical";
-    public KeyCode sprint_key = KeyCode.LeftShift;
-    public KeyCode jump_key = KeyCode.Space;
-    public KeyCode interact_key = KeyCode.E;
+    [SerializeField] public float mouse_sensitivity = 2.0f;
+    [SerializeField] public string horizontal_move_input = "Horizontal";
+    [SerializeField] public string vertical_move_input = "Vertical";
+    [SerializeField] public KeyCode sprint_key = KeyCode.LeftShift;
+    [SerializeField] public KeyCode jump_key = KeyCode.Space;
+    [SerializeField] public KeyCode interact_key = KeyCode.E;
+    [SerializeField] public KeyCode pause_key = KeyCode.Escape;
 
     [Header("Level Audio")]
-    public AudioSource player_music_source;
-    public AudioSource player_exposure_alert_source;
+    [SerializeField] public AudioSource player_music_source;
+    [SerializeField] public AudioSource player_exposure_alert_source;
     [SerializeField] private AudioClip level_exposure_increase_alert;
     [SerializeField] private AudioClip level_exposure_decrease_alert;
     [SerializeField] private AudioClip[] level_music;
@@ -54,6 +56,7 @@ public class Level : MonoBehaviour
     void Update()
     {
         HandleExposureChange();
+        HandlePauseInput();
     }
 
     //Lock Cursor
@@ -66,7 +69,7 @@ public class Level : MonoBehaviour
     //Unlock Cursor
     public void UnlockCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         //Later code here for other things
     }
@@ -74,19 +77,49 @@ public class Level : MonoBehaviour
     //Pause
     public void game_pause()
     {
-        //later
+        //Time scale
+        Time.timeScale = 0f;
     }
 
     //Unpause
     public void game_unpause()
     {
-        //Later
+        //Time scale
+        Time.timeScale = 1f;
     }
 
     //Return player
     public Player return_player()
     {
         return player;
+    }
+
+    //PAUSE
+    private void HandlePauseInput()
+    {
+        if (Input.GetKeyDown(pause_key))
+        {
+            UnityEngine.Debug.Log("ESC detected");
+            //Check if already paused
+            if (paused)
+            {
+                //Unpause
+                game_unpause();
+                LockCursor();
+                paused = false;
+                //Enable input
+                player.allow_input = true;
+            }
+           else
+            {
+                //Pause
+                game_pause();
+                UnlockCursor();
+                paused = true;
+                //Disable input
+                player.allow_input = false;
+            }
+        }
     }
 
     //MUSIC
@@ -229,4 +262,6 @@ public class Level : MonoBehaviour
             exposure_level = 0;
         }
     }
+
+    
 }

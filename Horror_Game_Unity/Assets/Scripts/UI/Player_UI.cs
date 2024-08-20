@@ -28,6 +28,10 @@ public class Player_UI : MonoBehaviour
     [SerializeField] public Image invul_shield;
     [SerializeField] public float lerp_timer_health;
     [SerializeField] public float lerp_timer_stamina;
+    [Header("Damage Frame")]
+    [SerializeField] public GameObject damage_frame_UI;
+    [SerializeField] public Image red_screen;
+    [SerializeField] public float blood_screen_fade_duration = 0.8f;
     [Header("Stamina Bar")]
     //Reference Stamina Bars
     [SerializeField] public Image front_staminabar;
@@ -39,7 +43,14 @@ public class Player_UI : MonoBehaviour
     //Reference Death Screen
     [SerializeField] public GameObject death_screen_UI;
     [SerializeField] public Image black_screen;
+    [SerializeField] public Button death_restart_button;
+    [SerializeField] public Button death_main_menu_button;
     [SerializeField] public float black_screen_fade_duration = 1f;
+    [Header("Pause")]
+    [SerializeField] public GameObject pause_UI;
+    [SerializeField] public Button menu_continue_button;
+    [SerializeField] public Button menu_restart_button;
+    [SerializeField] public Button menu_main_menu_button;
     [Header("Exposure")]
     [SerializeField] public Slider exposure_meter;
     [SerializeField] public TMP_Text TMP_exposure_level;
@@ -60,9 +71,9 @@ public class Player_UI : MonoBehaviour
 
     [Header("Misc")]
     //Reference Level
-    private Level level;
+    [SerializeField] private Level level;
     //Reference Player
-    private Player player;
+    [SerializeField] private Player player;
 
     void Start()
     {
@@ -91,6 +102,12 @@ public class Player_UI : MonoBehaviour
         interact_bar.gameObject.SetActive(false);
         //Hide shield
         invul_shield.gameObject.SetActive(false);
+        //Set damage blood frame off
+        damage_frame_UI.gameObject.SetActive(false);
+        //Set death screen inacitive
+        death_screen_UI.gameObject.SetActive(false);
+        //Set pause off
+        pause_UI.gameObject.SetActive(false);
     }
 
     public void UpdateUIHealthStamina(float current_health, float current_stamina)
@@ -109,6 +126,7 @@ public class Player_UI : MonoBehaviour
         UpdateStaminaUI();
         UpdateExposureLevel();
         UpdateInteractFrame();
+        UpdatePause();
     }
 
     public void ResetHealthLerp()
@@ -347,6 +365,33 @@ public class Player_UI : MonoBehaviour
         }
     }
 
+    public void UpdatePause()
+    {
+        //Detect if game paused and player alive
+        if (level.paused)
+        {
+            if (player.player_alive == true)
+            {
+                //Activate pause
+                main_UI.gameObject.SetActive(false);
+                exposure_alert_UI.gameObject.SetActive(false);
+                interact_UI.gameObject.SetActive(false);
+                pause_UI.gameObject.SetActive(true);
+                death_screen_UI.gameObject.SetActive(false);
+            }
+        }
+        if (!level.paused && player.player_alive == true)
+        {
+            UnityEngine.Debug.Log("Not Paused");
+            //Deactivate pause
+            main_UI.gameObject.SetActive(true);
+            exposure_alert_UI.gameObject.SetActive(true);
+            interact_UI.gameObject.SetActive(true);
+            pause_UI.gameObject.SetActive(false);
+            death_screen_UI.gameObject.SetActive(false);
+        }
+    }
+
     //Exposure Level Text
     private string exposure_level_text(int level)
     {
@@ -424,14 +469,49 @@ public class Player_UI : MonoBehaviour
     {
         //Disable everything
         //Health, Stamina, Exposure
+        damage_frame_UI.gameObject.SetActive(false);
         main_UI.gameObject.SetActive(false);
         exposure_alert_UI.gameObject.SetActive(false);
         interact_UI.gameObject.SetActive(false);
+        pause_UI.gameObject.SetActive(false);
 
         //Set death screen active
         death_screen_UI.gameObject.SetActive(true);
         //Fade into existence
         StartCoroutine(fade_from_black());
+        //Reset cursors
+        level.UnlockCursor();
+    }
+
+    public void Damage_RedFrame()
+    {
+        //Show
+        damage_frame_UI.gameObject.SetActive(true);
+        //Fadeaway
+        StartCoroutine (Red_FadeAway());
+    }
+
+    //Damage Frame Red fade away
+    IEnumerator Red_FadeAway()
+    {
+        //Black screen first
+        float elapsedTime = 0f;
+        Color color = red_screen.color;
+
+        while (elapsedTime < blood_screen_fade_duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0.6f, 0f, elapsedTime / blood_screen_fade_duration);
+            color.a = alpha;
+            red_screen.color = color;
+            yield return null;
+        }
+
+        // Ensure final value is set
+        color.a = 1f;
+        red_screen.color = color;
+        damage_frame_UI.gameObject.SetActive(false);
+        //Done
     }
 
     //Exposure Alert cooldown
