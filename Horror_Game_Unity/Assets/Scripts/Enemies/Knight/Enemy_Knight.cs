@@ -20,9 +20,9 @@ public class Enemy_Knight : Enemy
     [SerializeField] public Light eye_light_2;
     [SerializeField] public Light armor_light;
     [SerializeField] public Enemy_Knight_Weapons knight_weapons;
-    [SerializeField] public float speed_0 = 1.8f;
-    [SerializeField] public float speed_1 = 2.0f;
-    [SerializeField] public float speed_2 = 2.2f;
+    [SerializeField] public float speed_0 = 2.1f;
+    [SerializeField] public float speed_1 = 2.3f;
+    [SerializeField] public float speed_2 = 2.6f;
     [SerializeField] public float speed_3 = 1.8f;
     [SerializeField] private Camera main_camera;
     [SerializeField] private Plane[] cameraFrustum;
@@ -507,6 +507,9 @@ public class Enemy_Knight : Enemy
         agent.SetDestination(player.gameObject.transform.position);
         //Turn towards player
         //Calculate direction
+        //UnityEngine.Debug.Log("Destination set to: " + agent.destination);
+        //UnityEngine.Debug.Log("Agent speed: " + agent.speed);
+        //UnityEngine.Debug.Log("Agent is stopped: " + agent.isStopped);
         Vector3 direction = player.gameObject.transform.position - transform.position;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);

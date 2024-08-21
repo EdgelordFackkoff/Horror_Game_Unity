@@ -1,144 +1,251 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Librarian : Enemy
 {
-    [Header("Information")]
-    public float roam_interval;
+    [Header("Unique")]
+    [SerializeField] public float roam_interval;
+    [SerializeField] protected AudioSource smack_source;
     [SerializeField] private bool is_moving;
+    [SerializeField] private int current_state;
     [SerializeField] private float timer;
-
-    // NOT IMPLEMENTED YET
-    [SerializeField] private float speed_0 = 1;
-    [SerializeField] private float speed_1 = 1.5f;
-    [SerializeField] private float speed_2 = 2;
-    [SerializeField] private float speed_3 = 2.5f;
-
-    Player player;
-
-    [Header("Sight")]
-    public float aggro_radius;
-    [Range(0f, 360f)]
-    public float aggro_angle;
-    public LayerMask target_mask;
-    public LayerMask obstacle_mask;
-    public List<Transform> target_list;
-
-    public enum State
-    {
-        Chase,
-        Roam,
-        Roam_Near_Player
-    };
-    public State state;
-
+    [SerializeField] private float speed_0 = 1.7f;
+    [SerializeField] private float speed_1 = 2.0f;
+    [SerializeField] private float speed_2 = 2.2f;
+    [SerializeField] private float speed_3 = 2.4f;
 
     public override void Start()
     {
+        //No Nav-Mesh Agent
+        agent.enabled = false;
+
         //Setup
-        player = level.player;
+        can_attack = true;
+        Player player = level.player;
         last_known_player_location = player.gameObject.transform.position;
-
-        agent = GetComponent<NavMeshAgent>();
         agent.avoidancePriority = UnityEngine.Random.Range(30, 60);
-
-        state = State.Roam;
-        is_moving = false;
-
-        roam_interval = 10;
-
-        aggro_radius = 10f;
-        aggro_angle = 90f;
-
-        // Will always check for targets in aggro_angle
-        // State switch to chase is handled in here
-        StartCoroutine(TargetChecker());
+        current_state = 0;
 
         //AUDIO
-        move_sound_interval = 0.70f;
+        move_sound_interval = 0.60f;
         next_step_time = 0f;
         chatter_mininterval = 3f;
         chatter_maxinterval = 8f;
         chatter_playchance = 0.25f;
         chatter_nextchattertime = 0f;
 
+        //Camera Effects
+        targetRotation = new Vector3(-5f, 0f, 0f);
+        attacked_move_duration = 1.0f;
+        attacked_shake_magnitude = 0.1f;
+        attacked_shake_frequency = 5f;
+
     }
 
     public override void Handle_Animation()
     {
+        //See current animation
+        AnimatorStateInfo anim_info = animator.GetCurrentAnimatorStateInfo(0);
 
+        //Idle
+        if (current_state == 0)
+        {
+            //Later check to see if it is active
+            //Start hunting
+            current_state = 1;
+        }
+
+        //Hunting
+        if (current_state == 1)
+        {
+            //Start Moving
+            current_state = 2;
+        }
+
+        //Walking
+        if (current_state == 2)
+        {
+            //Walk
+            if (anim_info.IsName("Walk"))
+            {
+                //Nothing, you're walking
+            }
+            //Start walking
+            else
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Walk", true);
+            }
+        }
+
+        //If attacking
+        if (current_state == 3)
+        {
+            if (anim_info.IsName("Attack"))
+            {
+                //Special case
+                if (anim_info.normalizedTime >= 0.45f && anim_info.normalizedTime <= 0.50f)
+                {
+                    //Apply camera shake
+                    Player player = level.player;
+                    player.CameraAttackedShake(targetRotation, attacked_move_duration, attacked_shake_magnitude, attacked_shake_frequency);
+
+                    //Smack Sound
+                    PlaySmackSound();
+                }
+
+                //Check if finished
+                if (anim_info.normalizedTime >= 1.0f)
+                {
+                    //Walkround
+                    Vector3 rotation = transform.rotation.eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
+                    //Play sound
+                    UnityEngine.Debug.Log("Finished Attacking");
+                    //If finished switch around
+                    animator.SetBool("Idle", true);
+                    animator.SetBool("Attacking", false);
+                    animator.SetBool("Walk", false);
+                    //Set back to idle state
+                    current_state = 0;
+                    isattacking = false;
+                    can_attack = true;
+                }
+            }
+            else
+            {
+                animator.SetBool("Attacking", true);
+                animator.SetBool("Walk", false);
+                UnityEngine.Debug.Log("Start Attacking");
+                //Turn towards player
+                Player player = level.player;
+                transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+                //Walkround
+                Vector3 rotation = transform.rotation.eulerAngles;
+                transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
+            }
+        }
     }
+
     public override void Handle_Navigation()
     {
-        if (state != State.Roam_Near_Player)
-            timer += Time.deltaTime;
 
-        switch (state)
+        //If hunting
+        if (current_state == 1 || current_state == 2)
         {
-            case State.Chase:
-                // Chase player
-                StartCoroutine(Chasing());
-
-                break;
-            case State.Roam:
-                // After some time, find and go to a position close to the player
-                // Can be tweaked according to exposure level
-                if (timer > roam_interval)
-                {
-                    timer = 0;
-                    is_moving = false;
-                    state = State.Roam_Near_Player;
-                }
-
-                // Move to a random location near itself
-                if (!is_moving)
-                {
-                    StartCoroutine(RandomDestination());
-                    is_moving = true;
-                }
-
-                break;
-            case State.Roam_Near_Player:
-                // Move to random position near player
-                if (!is_moving)
-                {
-                    RandomDestinationNearPlayer();
-                    is_moving = true;
-                }
-                // Checks for whether this has arrived to intended location or not
-                else if (is_moving)
-                {
-                    if (!agent.pathPending)
-                    {
-                        if (agent.remainingDistance <= agent.stoppingDistance)
-                        {
-                            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0)
-                            {
-                                Debug.Log("am here");
-                                state = State.Roam;
-                                is_moving = false;
-                            }
-                        }
-                    }
-                }
-
-                break;
+            //Update Player location
+            UpdatePlayer();
         }
+
+        //If attacking
+        if (current_state == 3)
+        {
+            agent.enabled = false;
+        }
+
     }
     public override void Handle_Behaviour()
     {
 
     }
+
     public override void Handle_Audio()
     {
+        //Handle Footsteps
+        if (current_state == 2 && Time.time > next_step_time)
+        {
+            //Play footsteps
+            PlayFootstep();
+            next_step_time = Time.time + move_sound_interval;
+        }
+        else if (current_state != 2)
+        {
+            //Stop playing
+            move_source.Stop();
+        }
 
+        //Handle Chatter
+        //Chatter
+        if (Time.time >= chatter_nextchattertime)
+        {
+            // Randomly decide whether to play a chatter sound
+       
+            if (UnityEngine.Random.value <= chatter_playchance)
+            {
+                //Random Chatter Played
+                UnityEngine.Debug.Log("Chatter Played");
+                PlayRandomChatter();
+            }
+            // Set the time for the next possible chatter sound
+            chatter_nextchattertime = Time.time + UnityEngine.Random.Range(chatter_mininterval, chatter_maxinterval);
+        }
+    }
+
+    void PlayRandomChatter()
+    {
+
+        //Randomize Footstep
+        int random_index;
+        //Just to idiotproof errors
+        if (chatter_sounds.Length == 1)
+        {
+            random_index = 0;
+        }
+        else
+        {
+            random_index = UnityEngine.Random.Range(0, chatter_sounds.Length - 1);
+            if (random_index >= chatter_last_played_chatter_sound)
+            {
+                random_index++;
+            }
+        }
+
+        //Randomize play
+        chatter_last_played_chatter_sound = random_index;
+        chatter_source.clip = chatter_sounds[random_index];
+        chatter_source.Play();
+    }
+
+    void PlayFootstep()
+    {
+        //Randomize Footstep
+        int random_index;
+        //Just to idiotproof errors
+        if (move_sounds.Length == 1)
+        {
+            random_index = 0;
+        }
+        else
+        {
+            random_index = UnityEngine.Random.Range(0, move_sounds.Length - 1);
+            if (random_index >= last_played_move_sound)
+            {
+                random_index++;
+            }
+        }
+
+        //Randomize play
+        last_played_move_sound = random_index;
+        move_source.clip = move_sounds[random_index];
+        move_source.Play();
+    }
+
+    void PlaySmackSound()
+    {
+        smack_source.Play();
     }
 
     public override void Handle_Attack()
     {
-
+        if (isattacking == true)
+        {
+            //Set state to 3
+            current_state = 3;
+            can_attack = false;
+        }
     }
 
     public override void Handle_Misc()
@@ -151,90 +258,18 @@ public class Librarian : Enemy
 
     }
 
-    public Vector3 RandomNavMeshPosition(float radius, Vector3 pos)
+    void UpdatePlayer()
     {
-        Vector3 randomDir = Random.insideUnitSphere * radius;
-        randomDir += pos;
-        NavMeshHit hit;
-        Vector3 final_pos = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDir, out hit, radius, 1))
-            final_pos = hit.position;
-        return final_pos;
-    }
-
-    private IEnumerator RandomDestination()
-    {
-        agent.destination = RandomNavMeshPosition(15, transform.position);
-        yield return new WaitForSeconds(5);
-        is_moving = false;
-    }
-
-    private void RandomDestinationNearPlayer()
-    {
-        last_known_player_location = player.gameObject.transform.position;
-        agent.destination = RandomNavMeshPosition(15, last_known_player_location);
-
-        Debug.Log("not there");
-    }
-
-    public void FindVisibleTargets()
-    {
-        target_list.Clear();
-        Collider[] targetsInRadius = Physics.OverlapSphere(transform.position, aggro_radius, target_mask);
-
-        // Find all targets in circle around itself
-        for (int i = 0; i < targetsInRadius.Length; i++)
-        {
-            Transform target = targetsInRadius[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-
-            // Find all targets inside angle
-            if (Vector3.Angle(transform.forward, dirToTarget) < aggro_angle / 2)
-            {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
-
-                // Check if [LAYER] is blocking line of sight(raycast)
-                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacle_mask))
-                {
-                    // Add to list for checking
-                    target_list.Add(target);
-                    state = State.Chase;
-                }
-            }
-        }
-    }
-
-    private IEnumerator TargetChecker()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.2f);
-            FindVisibleTargets();
-        }
-    }
-
-    private IEnumerator Chasing()
-    {
-        // Checks if player is in list
-        if (target_list.Count != 0)
-        {
-            last_known_player_location = player.gameObject.transform.position;
-            agent.destination = last_known_player_location;
-        }
-        // Handling roam state switch
-        else
-        {
-            state = State.Roam;
-        }
-        yield return new WaitForSeconds(0.2f);
-    }
-
-    public Vector3 DirFromAngle(float angle, bool angleIsGlobal)
-    {
-        if (!angleIsGlobal)
-        {
-            angle += transform.eulerAngles.y;
-        }
-        return new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
+        agent.enabled = true;
+        //Set to player location
+        Player player = level.player;
+        //UnityEngine.Debug.Log(player);
+        agent.SetDestination(player.gameObject.transform.position);
+        //Turn towards player
+        //Calculate direction
+        Vector3 direction = player.gameObject.transform.position - transform.position;
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 1.00f);
     }
 }

@@ -1070,6 +1070,7 @@ MonoBehaviour:
   can_sprint: 1
   is_interacting: 0
   current_interacting: {fileID: 0}
+  player_alive: 1
   game_music_source: {fileID: 5647224520788490978}
   exposure_alert_source: {fileID: 940910709103703070}
   on_hit_grunt_source: {fileID: 652148232362821086}
@@ -1077,7 +1078,12 @@ MonoBehaviour:
   pain_loop_source: {fileID: 7488019667049872147}
   pain_loop_sounds: []
   footstep_source: {fileID: 7481211018592537787}
-  footstep_sounds: []
+  footstep_sounds:
+  - {fileID: 8300000, guid: ddead27fd9acab64e8452eb675cf0f6e, type: 3}
+  - {fileID: 8300000, guid: f9019154b60d31f4e8793229b130f5e9, type: 3}
+  - {fileID: 8300000, guid: 44ea745296691744bb678a54dc476860, type: 3}
+  - {fileID: 8300000, guid: a7ff58d439ea2d540b0af96dec262bd7, type: 3}
+  - {fileID: 8300000, guid: 003d3ff82e693554087ea4215d1b2ea0, type: 3}
   walk_interval: 0.5
   sprint_interval: 0.3
   velocity_threshold: 2
