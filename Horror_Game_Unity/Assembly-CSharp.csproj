@@ -62,9 +62,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Objects\PickUps\PickUps.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitbox.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Librarian\LibrarianEditor.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitboxes\Interact_Hitbox.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Pause_Screen.cs" />
     <Compile Include="Assets\Scripts\Environment\FlickerLight.cs" />
     <Compile Include="Assets\material.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_1.cs" />
@@ -78,12 +78,12 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Knight\Enemy_Knight_Weapons.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Death_Screen.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_4.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3Objective.cs" />
     <Compile Include="Assets\Scripts\UI\Player_UI.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Damagebox.cs" />
     <Compile Include="Assets\Scripts\Enemies\Dancer\Dancer.cs" />
-    <Compile Include="Assets\Scripts\UI\Player_Restart_Button.cs" />
     <Compile Include="Assets\Scripts\Enemies\Librarian\Librarian.cs" />
     <Compile Include="Assets\Scripts\Menu\ButtonGrow.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactables_2.cs" />
