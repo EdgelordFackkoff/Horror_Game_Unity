@@ -62,19 +62,31 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Objects\PickUps\PickUps.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitbox.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\Player\Player_Hitboxes\Interact_Hitbox.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+=======
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabExporter.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Hitboxes\Interact_Hitbox.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabPlugin.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabImporterWindow.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\UI\UI_Pause_Screen.cs" />
     <Compile Include="Assets\Scripts\Environment\FlickerLight.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\AssetBrowser\SketchfabModelWindow.cs" />
     <Compile Include="Assets\material.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabUI.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_1.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitboxes\Damage_Hitbox.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabImporter.cs" />
     <Compile Include="Assets\Materials\Level_2_Castle\Environment\Fire\AnimateTiledTexture.cs" />
     <Compile Include="Assets\Scripts\Menu\ToggleMenu.cs" />
     <Compile Include="Assets\Scripts\Enemies\Dancer\DancerManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_3.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabLogger.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Knight\Enemy_Knight_Weapons.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3ObjectiveManager.cs" />
@@ -82,37 +94,84 @@
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_4.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3Objective.cs" />
     <Compile Include="Assets\Scripts\UI\Player_UI.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\AssetBrowser\SketchfabBrowserManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Damagebox.cs" />
     <Compile Include="Assets\Scripts\Enemies\Dancer\Dancer.cs" />
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\AssetBrowser\SketchfabBrowserWindow.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\Enemies\Librarian\Librarian.cs" />
     <Compile Include="Assets\Scripts\Menu\ButtonGrow.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactables_2.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\Resizer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Knight\Enemy_Knight.cs" />
+    <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabApi.cs" />
     <Compile Include="Assets\Scripts\Menu\CheckPanel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Import\Book_Shelf\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Import\dusty_old_bookshelf_free\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Import\Interrogation_(1970)\license.txt" />
+    <None Include="Assets\Import\WOODEN_DUCK_TOY\license.txt" />
+    <None Include="Assets\Import\Book&apos;s_Cabinet\license.txt" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFFlipTexture.shader" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFColorSpace.cginc" />
+    <None Include="Assets\Import\Painting_by_Zdzislaw_Beksinski_(2)\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFPackOccMetalRough.shader" />
+    <None Include="Assets\Import\1924.859_Table_Fountain\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Import\1991.45_Table_and_Tea_Service\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Import\Coffee_Table\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Import\Death_Crowning_Innocence_(1896)\license.txt" />
+    <None Include="Assets\Import\Folded_Newspaper\license.txt" />
+    <None Include="Assets\Import\Chaise__dossier_peint\license.txt" />
+    <None Include="Assets\Import\Slender_fortress_Toy_Freddy_Rig\license.txt" />
+    <None Include="Assets\Import\Grandfather_Clock\license.txt" />
+    <None Include="Assets\Import\Crow\license.txt" />
+    <None Include="Assets\Import\3D_Printable_The_Three_Graces\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Import\Portrait_of_Germaine_Wiener\license.txt" />
+    <None Include="Assets\Import\Magnifying_Glass\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Import\Painting_by_Zdzislaw_Beksinski_(4)\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Import\Marble_Chess_Set\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Import\Pops__old_pictures_and_mirrors\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Libraries\SketchfabPlugin.dll" />
+    <None Include="Assets\Import\Newspaper_Stack_version_2\license.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Import\Toy_Boat\license.txt" />
+    <None Include="Assets\Import\Halloween_Cursed_Pumpkin\license.txt" />
+    <None Include="Assets\Import\Painting_by_Zdzislaw_Beksinski_(3)\license.txt" />
+    <None Include="Assets\Import\Beatrix_Newspaper\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Libraries\Ionic.Zip.Unity.dll" />
+    <None Include="Assets\Import\Vintage_Black_Wooden_Desk\license.txt" />
+    <None Include="Assets\Import\Late_1800s_French_Writing_Desks\license.txt" />
+    <None Include="Assets\Import\Matrioshka\license.txt" />
+    <None Include="Assets\Import\Grand_Classic_Edwardian_Dining_Armchair\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFBumpToNormal.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Import\Medieval_Open_Book_1\license.txt" />
+    <None Include="Assets\Import\Victorian_Fire_Place_(Free)\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Import\Fancy_Victorian_Square_Picture_Frame\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Sketchfab For Unity\Dependencies\Libraries\GLTFSerialization.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -453,6 +512,18 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SketchfabPlugin">
+      <HintPath>Assets\Sketchfab For Unity\Dependencies\Libraries\SketchfabPlugin.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip.Unity">
+      <HintPath>Assets\Sketchfab For Unity\Dependencies\Libraries\Ionic.Zip.Unity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GLTFSerialization">
+      <HintPath>Assets\Sketchfab For Unity\Dependencies\Libraries\GLTFSerialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
