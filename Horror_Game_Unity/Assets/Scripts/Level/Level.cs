@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,15 @@ public class Level : MonoBehaviour
     [Header("Global/Shared Variables")]
     public Player player;
     public float gravity = 9.18f;
+
+    [Header("Level Specific")]
+    [Header("Level 1")]
+    [Header("Level 2")]
+    [SerializeField] private int current_section = 1;
+    [SerializeField] private Enemy_Knight[] activatable_knights;
+    [SerializeField] private Enemy_Knight[] initial_knights;
+    [SerializeField] private Enemy_Knight[] section_1_knights;
+    [SerializeField] private Enemy_Knight[] all_knights;
 
     //Start
     void Awake()
@@ -263,5 +273,29 @@ public class Level : MonoBehaviour
         }
     }
 
-    
+    //LEVEL 3
+    public bool check_if_knight_activatable(Enemy_Knight knight)
+    {
+        return activatable_knights.Contains(knight);
+    }
+
+    public void activate_initial_knights()
+    {
+        Enemy_Knight[] merged_knights = activatable_knights.Concat(initial_knights).ToArray();
+        activatable_knights = merged_knights;
+    }
+
+    public void activate_section_knights(int x)
+    {
+        switch (x)
+        {
+            case 1:
+                Enemy_Knight[] merged_knights = activatable_knights.Concat(section_1_knights).ToArray();
+                activatable_knights = merged_knights;
+                break;
+            default:
+                //Youre not supposed to be here
+                break;
+        }
+    }
 }

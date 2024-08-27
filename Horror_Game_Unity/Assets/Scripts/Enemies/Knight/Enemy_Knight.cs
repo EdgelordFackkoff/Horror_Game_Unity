@@ -309,15 +309,20 @@ public class Enemy_Knight : Enemy
     //Handle animation
     public override void Handle_Behaviour()
     {
-        //Some changes to test
-        if (level.exposure_level <= activation_level && current_active_status == 0)
+        //Check if allowed to activate
+        bool can_activate = level.check_if_knight_activatable(this);
+        //if can cactivate
+        if (can_activate)
         {
-            current_active_status = 1;
-        }
+            if (level.exposure_level <= activation_level && current_active_status == 0)
+            {
+                current_active_status = 1;
+            }
 
-        if (level.exposure_level < activation_level && current_active_status != 0)
-        {
-            current_active_status = 0;
+            if (level.exposure_level < activation_level && current_active_status != 0)
+            {
+                current_active_status = 0;
+            }
         }
 
         //Workaround
