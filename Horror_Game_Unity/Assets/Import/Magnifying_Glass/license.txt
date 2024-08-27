@@ -1,0 +1,11 @@
+Model Information:
+* title:	Magnifying Glass
+* source:	https://sketchfab.com/3d-models/magnifying-glass-870341d38f044a0881a26a686ec23084
+* author:	akiko_yoshino (https://sketchfab.com/akiko_yoshino)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Magnifying Glass" (https://sketchfab.com/3d-models/magnifying-glass-870341d38f044a0881a26a686ec23084) by akiko_yoshino (https://sketchfab.com/akiko_yoshino) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

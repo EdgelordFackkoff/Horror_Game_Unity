@@ -1,0 +1,11 @@
+Model Information:
+* title:	Interrogation (1970)
+* source:	https://sketchfab.com/3d-models/interrogation-1970-1281419b03be4b40b063c9f17737f6f3
+* author:	The Urban Scans Project (https://sketchfab.com/urbanscansproject)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Interrogation (1970)" (https://sketchfab.com/3d-models/interrogation-1970-1281419b03be4b40b063c9f17737f6f3) by The Urban Scans Project (https://sketchfab.com/urbanscansproject) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

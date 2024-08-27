@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pops: old pictures and mirrors
+* source:	https://sketchfab.com/3d-models/pops-old-pictures-and-mirrors-2c7748ec848c467abfc0298a3a0c6129
+* author:	Adekune (https://sketchfab.com/Adekune)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pops: old pictures and mirrors" (https://sketchfab.com/3d-models/pops-old-pictures-and-mirrors-2c7748ec848c467abfc0298a3a0c6129) by Adekune (https://sketchfab.com/Adekune) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

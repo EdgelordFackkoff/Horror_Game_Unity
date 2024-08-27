@@ -1,0 +1,11 @@
+Model Information:
+* title:	Newspaper Stack version 2
+* source:	https://sketchfab.com/3d-models/newspaper-stack-version-2-3e9625ed4d3e4ee6817cf4a78bdfd47c
+* author:	CobySam (https://sketchfab.com/CobySam)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Newspaper Stack version 2" (https://sketchfab.com/3d-models/newspaper-stack-version-2-3e9625ed4d3e4ee6817cf4a78bdfd47c) by CobySam (https://sketchfab.com/CobySam) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

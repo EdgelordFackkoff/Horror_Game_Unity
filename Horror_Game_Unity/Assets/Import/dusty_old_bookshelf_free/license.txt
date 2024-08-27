@@ -1,0 +1,11 @@
+Model Information:
+* title:	dusty_old_bookshelf_free
+* source:	https://sketchfab.com/3d-models/dusty-old-bookshelf-free-9a159a9b14964ebdb48c152bd76a6e62
+* author:	Xman (https://sketchfab.com/manzar20)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "dusty_old_bookshelf_free" (https://sketchfab.com/3d-models/dusty-old-bookshelf-free-9a159a9b14964ebdb48c152bd76a6e62) by Xman (https://sketchfab.com/manzar20) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

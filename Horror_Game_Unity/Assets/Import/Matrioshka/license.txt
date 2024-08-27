@@ -1,0 +1,11 @@
+Model Information:
+* title:	Matrioshka
+* source:	https://sketchfab.com/3d-models/matrioshka-a5ed2e8d5e82431ba5d620306c3f3a4a
+* author:	dimoni (https://sketchfab.com/dimoni)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Matrioshka" (https://sketchfab.com/3d-models/matrioshka-a5ed2e8d5e82431ba5d620306c3f3a4a) by dimoni (https://sketchfab.com/dimoni) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
