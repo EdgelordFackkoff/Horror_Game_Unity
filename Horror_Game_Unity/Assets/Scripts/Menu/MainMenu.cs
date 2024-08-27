@@ -32,12 +32,12 @@ public class MainMenu : MonoBehaviour
     // File -> Build Settings -> Add Open Scenes(click with your scene open)
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("Testing_Grounds"); // Level_1
+        SceneManager.LoadScene("Forgotten Library"); // Level_1
     }
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene("Test2");
+        SceneManager.LoadScene("Castle");
     }
 
     public void LoadLevel3()

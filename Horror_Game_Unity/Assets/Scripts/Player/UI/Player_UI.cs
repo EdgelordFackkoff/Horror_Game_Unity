@@ -382,7 +382,7 @@ public class Player_UI : MonoBehaviour
         }
         if (!level.paused && player.player_alive == true)
         {
-            UnityEngine.Debug.Log("Not Paused");
+            //UnityEngine.Debug.Log("Not Paused");
             //Deactivate pause
             main_UI.gameObject.SetActive(true);
             exposure_alert_UI.gameObject.SetActive(true);

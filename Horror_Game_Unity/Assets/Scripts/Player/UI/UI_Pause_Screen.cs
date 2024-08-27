@@ -18,12 +18,15 @@ public class UI_Pause_Screen : MonoBehaviour
     public void main_menu_clicked()
     {
         //Reload scene
+        level.game_unpause();
         SceneManager.LoadScene("Main_Menu");
     }
 
     // Restart Button
     public void restart_clicked()
     {
+        level.game_unpause();
+        level.LockCursor();
         //Reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //Workaround
