@@ -47,7 +47,10 @@ public class Level : MonoBehaviour
     [SerializeField] private Enemy_Knight[] activatable_knights;
     [SerializeField] private Enemy_Knight[] initial_knights;
     [SerializeField] private Enemy_Knight[] section_1_knights;
-    [SerializeField] private Enemy_Knight[] all_knights;
+    [SerializeField] private Enemy_Knight[] section_2_knights;
+    [SerializeField] private Enemy_Knight[] section_3_knights;
+    [SerializeField] private Enemy_Knight[] secret_room_knights_1;
+    [SerializeField] private Enemy_Knight[] secret_room_knights_2;
 
     //Start
     void Awake()
@@ -287,10 +290,31 @@ public class Level : MonoBehaviour
 
     public void activate_section_knights(int x)
     {
+
+        Enemy_Knight[] merged_knights = null;
+
         switch (x)
         {
             case 1:
-                Enemy_Knight[] merged_knights = activatable_knights.Concat(section_1_knights).ToArray();
+                merged_knights = activatable_knights.Concat(section_1_knights).ToArray();
+                activatable_knights = merged_knights;
+                break;
+            case 2:
+                merged_knights = activatable_knights.Concat(section_2_knights).ToArray();
+                activatable_knights = merged_knights;
+                break;
+            case 3:
+                merged_knights = activatable_knights.Concat(section_3_knights).ToArray();
+                activatable_knights = merged_knights;
+                break;
+            case 4:
+                //Secret room_1
+                merged_knights = activatable_knights.Concat(secret_room_knights_1).ToArray();
+                activatable_knights = merged_knights;
+                break;
+            case 5:
+                //Secret room_2
+                merged_knights = activatable_knights.Concat(secret_room_knights_2).ToArray();
                 activatable_knights = merged_knights;
                 break;
             default:

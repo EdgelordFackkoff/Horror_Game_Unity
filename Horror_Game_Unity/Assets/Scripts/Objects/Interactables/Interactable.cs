@@ -12,7 +12,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] private bool can_interact;
     //For doors, secret walls or other things etc
     //Done in this way so one object interacted can affect multiple objects
-    [SerializeField] private GameObject[] affected_objects;
+    [SerializeField] protected GameObject[] affected_objects;
     //Variable to detect if it is an instant interact
     [SerializeField] private bool instant_interactable;
     //If there is a period where you have to constantly interact with said object
@@ -98,22 +98,15 @@ public abstract class Interactable : MonoBehaviour
     //0 is false, 1 is yes
     public void set_interactability(int x)
     {
-        if (x != 0 || x != 1)
+        switch (x)
         {
-            //ERROR not supposed to be here
-        }
-        else
-        {
-            switch (x)
-            {
-                case 0:
-                    can_interact = false;break;
-                case 1:
-                    can_interact = true; break;
-                default:
-                    //ERROR you shouldn't be here
-                    can_interact = false; break;
-            }
+            case 0:
+                can_interact = false; break;
+            case 1:
+                can_interact = true; break;
+            default:
+                //ERROR you shouldn't be here
+                can_interact = false; break;
         }
     }
 }
