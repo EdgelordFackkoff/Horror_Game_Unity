@@ -16,6 +16,8 @@ public class ButtonGrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public Vector2 original_rect;
     public Vector2 new_rect;
 
+    public AudioSource mouse_over_audio;
+
     void Start()
     {
         rect_transform = GetComponent<RectTransform>();
@@ -26,12 +28,14 @@ public class ButtonGrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        mouse_over_audio.Play();
         StopAllCoroutines();
         StartCoroutine(GrowDuration(original_size, new_size, original_rect, new_rect, 0.1f));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        mouse_over_audio.Stop();
         StopAllCoroutines();
         StartCoroutine(GrowDuration(new_size, original_size, new_rect, original_rect, 0.1f));
     }

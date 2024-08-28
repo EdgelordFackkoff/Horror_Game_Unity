@@ -213,7 +213,7 @@ public class Librarian : Enemy
         }
 
         //Knows where the palyer is
-        if (current_state == 3)
+        if (current_state == 3 || level.exposure_level == 3)
         {
             //Update Player location
             UpdatePlayer();
@@ -406,7 +406,22 @@ public class Librarian : Enemy
 
     public override void Handle_Misc()
     {
-
+        if (level.exposure_level == 0)
+        {
+            agent.speed = speed_0;
+        }
+        else if (level.exposure_level == 1)
+        {
+            agent.speed = speed_1;
+        }
+        else if (level.exposure_level == 2)
+        {
+            agent.speed = speed_2;
+        }
+        else if (level.exposure_level == 3)
+        {
+            agent.speed = speed_3;
+        }
     }
 
     public override void Handle_Paused()

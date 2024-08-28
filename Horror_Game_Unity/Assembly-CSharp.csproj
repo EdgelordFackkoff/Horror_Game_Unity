@@ -63,6 +63,8 @@
     <Compile Include="Assets\Scripts\Objects\PickUps\PickUps.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitbox.cs" />
     <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabExporter.cs" />
+    <Compile Include="Assets\Scripts\Level\Level 2\Pressure_Plate.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Level_2\Gear.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Hitboxes\Interact_Hitbox.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Sketchfab For Unity\Scripts\SketchfabPlugin.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Player\UI\UI_Pause_Screen.cs" />
     <Compile Include="Assets\Scripts\Enemies\Knight\Enemy_Knight_Weapons.cs" />
+    <Compile Include="Assets\Scripts\Level\Level 2\Doors.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactable_4.cs" />
     <Compile Include="Assets\Scripts\Level\Level 3\Level3Objective.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy_Damagebox.cs" />
     <Compile Include="Assets\Scripts\Enemies\Dancer\Dancer.cs" />
     <Compile Include="Assets\Sketchfab For Unity\Scripts\AssetBrowser\SketchfabBrowserWindow.cs" />
+    <Compile Include="Assets\Scripts\Level\Level 2\Pressure_Plate_set.cs" />
     <Compile Include="Assets\Scripts\Enemies\Librarian\Librarian.cs" />
     <Compile Include="Assets\Scripts\Menu\ButtonGrow.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Testing\Interactables_2.cs" />

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_2/Castle.unity
     guid: c5606e577d89c83438599d573b172b10
+  - enabled: 1
+    path: Assets/Scenes/Level_1/Forgotten Library.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

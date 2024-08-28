@@ -6,6 +6,14 @@ using TMPro;
 
 public class ObjectiveManager : MonoBehaviour
 {
+    [Header("Level")]
+    public Level level;
+
+    [Header("Audio")]
+    public AudioSource collection_sound;
+    public AudioSource exit_sound;
+
+
     [Header("UI")]
     public TextMeshProUGUI objective_text;
 
@@ -18,11 +26,19 @@ public class ObjectiveManager : MonoBehaviour
     {
         getCompleted();
         objectives[objective_index] = true;
+
+        level.increase_exposure_amount(25);
         updateExit();
         if (!can_exit)
+        {
+            collection_sound.Play();
             objective_text.text = completed_objectives_count + " / 15 books";
+        }
         else
+        {
+            exit_sound.Play();
             objective_text.text = "Find the hidden exit!";
+        }
     }
 
     public void updateExit()
