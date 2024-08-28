@@ -319,7 +319,7 @@ public class Enemy_Knight : Enemy
                 current_active_status = 1;
             }
 
-            else if (level.exposure_level < activation_level && current_active_status != 0)
+             if (level.exposure_level < activation_level && current_active_status != 0)
             {
                 current_active_status = 0;
             }
