@@ -337,14 +337,15 @@ MonoBehaviour:
   damage_box: {fileID: 8912614034235222322}
   eye_level: {fileID: 111017327044794356}
   current_active_status: 0
+  activation_level: 0
   eye_light_1: {fileID: 6742606796995496919}
   eye_light_2: {fileID: 5822135235941640911}
   armor_light: {fileID: 2271332824481512126}
   knight_weapons: {fileID: 4201377773688690821}
-  speed_0: 1.6
-  speed_1: 1.8
-  speed_2: 2
-  speed_3: 1.85
+  speed_0: 2.5
+  speed_1: 2.9
+  speed_2: 3
+  speed_3: 2.7
   main_camera: {fileID: 0}
   collider_main: {fileID: 8793199611608007237}
   camera_seen: 0
