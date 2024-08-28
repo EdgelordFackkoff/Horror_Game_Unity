@@ -452,6 +452,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool isSprinting()
+    {
+        return is_sprinting;
+    }
+
     public void CameraAttackedShake(Vector3 targetRotation, float attackedMoveDuration, float attackedShakeMagnitude, float attackedShakeFrequency)
     {
         // Set camera to shaking

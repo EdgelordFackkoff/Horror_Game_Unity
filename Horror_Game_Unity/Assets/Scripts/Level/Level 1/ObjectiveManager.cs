@@ -27,7 +27,6 @@ public class ObjectiveManager : MonoBehaviour
         getCompleted();
         objectives[objective_index] = true;
 
-        level.increase_exposure_amount(25);
         updateExit();
         if (!can_exit)
         {

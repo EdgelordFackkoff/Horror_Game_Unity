@@ -42,6 +42,8 @@ public class Level : MonoBehaviour
 
     [Header("Level Specific")]
     [Header("Level 1")]
+    [SerializeField] private float exp_increase_sprint = 0.007f;
+    [SerializeField] private float decay = 0.00000000000000000000000000005f;
     [Header("Level 2")]
     [SerializeField] private int current_section = 1;
     [SerializeField] private Enemy_Knight[] activatable_knights;
@@ -70,6 +72,7 @@ public class Level : MonoBehaviour
     {
         HandleExposureChange();
         HandlePauseInput();
+        HandleLevel_1();
     }
 
     //Lock Cursor
@@ -276,7 +279,26 @@ public class Level : MonoBehaviour
         }
     }
 
-    //LEVEL 3
+    //LEVEL 1
+    void HandleLevel_1()
+    {
+        if (level_int == 1)
+        {
+            //Check if player sprinting
+            if (player.isSprinting())
+            {
+                //Increase exposure
+                increase_exposure_amount(exp_increase_sprint);
+            }
+            else
+            {
+                //Drain exposure
+                decrease_exposure_amount(decay);
+            }
+        }
+    }
+
+    //LEVEL 2
     public bool check_if_knight_activatable(Enemy_Knight knight)
     {
         return activatable_knights.Contains(knight);
