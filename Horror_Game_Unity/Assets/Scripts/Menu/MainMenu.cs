@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene("Level_3");
+        SceneManager.LoadScene("Ruined_Theatre");
     }
     ///////////////////////////////////////////////////////////////////////////
 }

@@ -9,13 +9,14 @@ public class Dancer : Enemy
     [SerializeField] private bool is_moving;
     [SerializeField] private float timer;
 
-    // NOT IMPLEMENTED YET
     [SerializeField] private float speed_0 = 5;
     [SerializeField] private float speed_1 = 7;
     [SerializeField] private float speed_2 = 9;
     [SerializeField] private float speed_3 = 11;
 
-    [SerializeField] private float speed_dancing = 3;
+    public Transform reset_position;
+
+    [SerializeField] private float speed_dancing = 2;
 
     Player player;
     public DancerManager dancer_manager;
@@ -24,7 +25,7 @@ public class Dancer : Enemy
     {
         Dancing,
         Not_Dancing,
-        Perma_Active // maybe will not implement
+        Attack
     };
     public State state;
 
@@ -41,6 +42,7 @@ public class Dancer : Enemy
         agent.acceleration = 100;
         agent.autoBraking = false;
         agent.speed = speed_dancing;
+        state = State.Dancing;
 
         is_moving = false;
 
@@ -58,15 +60,24 @@ public class Dancer : Enemy
 
     public override void Handle_Animation()
     {
-
+        //AnimatorStateInfo anim_info = animator.GetCurrentAnimatorStateInfo(0);
     }
     public override void Handle_Navigation()
     {
         timer += Time.deltaTime;
+        AnimatorStateInfo anim_info = animator.GetCurrentAnimatorStateInfo(0);
 
         switch (state)
         {
             case State.Dancing:
+                animator.speed = 1f;
+                animator.SetBool("Walking", true);
+
+                if (isattacking)
+                {
+                    state = State.Attack;
+                }
+
                 if (!is_moving)
                 {
                     RandomDestination();
@@ -89,6 +100,13 @@ public class Dancer : Enemy
 
                 break;
             case State.Not_Dancing:
+                animator.SetBool("Walking", true);
+
+                if (isattacking)
+                {
+                    state = State.Attack;
+                }
+
                 if (is_moving)
                 {
                     StopMoving();
@@ -96,14 +114,81 @@ public class Dancer : Enemy
                 }
                 if (player.GetComponent<CharacterController>().velocity.magnitude > 0.1f)
                 {
+                    animator.speed = 1f;
                     Chasing();
                 }
                 else if (player.GetComponent<CharacterController>().velocity.magnitude < 0.1f)
                 {
+                    animator.speed = 0f;
                     StopMoving();
                 }
                 break;
-            case State.Perma_Active:
+            case State.Attack:
+                animator.SetBool("Attacking", true);
+
+                //Unfreeze Animation                   
+                animator.speed = 1.0f;
+                //Remove navigation
+                //agent.enabled = false;
+                //Check if attacking already
+                //if (anim_info.IsName("Attacking"))
+                //{
+                //    //Special case
+                //    if (anim_info.normalizedTime >= 0.60f && anim_info.normalizedTime <= 0.90f)
+                //    {
+                //        //Apply camera shake
+                //        Player player = level.player;
+                //        player.CameraAttackedShake(targetRotation, attacked_move_duration, attacked_shake_magnitude, attacked_shake_frequency);
+                //    }
+
+                //    //Check if finished
+                //    if (anim_info.normalizedTime >= 1.0f)
+                //    {
+                //        //Walkround
+                //        Vector3 rotation = transform.rotation.eulerAngles;
+                //        transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
+                //        //Play sound
+                //        UnityEngine.Debug.Log("Finished Attacking");
+                //        //If finished switch around
+                //        animator.SetBool("Idling", false);
+                //        animator.SetBool("Walking", false);
+                //        animator.SetBool("Attacking", false);
+                //        //Set back to idle state
+                //        MusicChecker();
+                //        isattacking = false;
+                //        can_attack = true;
+                //        transform.position = reset_position.position;
+                //    }
+                //}
+                //else
+                //{
+                //    animator.SetBool("Idling", false);
+                //    animator.SetBool("Walking", false);
+                //    animator.SetBool("Attacking", true);
+                //    UnityEngine.Debug.Log("Start Attacking");
+                //    //Turn towards player
+                //    Player player = level.player;
+                //    transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+                //    //Walkround
+                //    Vector3 rotation = transform.rotation.eulerAngles;
+                //    transform.rotation = Quaternion.Euler(0, rotation.y, rotation.z);
+                //    MusicChecker();
+
+                //}
+                //MusicChecker();
+
+                if (anim_info.IsName("Attack"))
+                {
+                    if (anim_info.normalizedTime >= 1.0f)
+                    {
+                        stateChecker();
+                        Debug.Log("helpppp");
+                        isattacking = false;
+                        animator.SetBool("Attacking", false);
+                        transform.position = reset_position.position;
+                    }
+                }
+
 
                 break;
         }
@@ -137,16 +222,7 @@ public class Dancer : Enemy
         {
             yield return new WaitForSeconds(0.1f);
             timer = 0;
-            if (dancer_manager.is_music_playing)
-            {
-                agent.speed = speed_dancing;
-                state = State.Dancing;
-            }
-            else if (!dancer_manager.is_music_playing)
-            {
-                agent.speed = speed_0;
-                state = State.Not_Dancing;
-            }
+            stateChecker();
         }
     }
 
@@ -175,5 +251,26 @@ public class Dancer : Enemy
     {
         last_known_player_location = player.gameObject.transform.position;
         agent.destination = last_known_player_location;
+    }
+
+    private void stateChecker()
+    {
+        if (dancer_manager.is_music_playing)
+        {
+            agent.speed = speed_dancing;
+            state = State.Dancing;
+        }
+        else if (!dancer_manager.is_music_playing)
+        {
+            if (level.exposure_amount == 0)
+                agent.speed = speed_0;
+            if (level.exposure_amount == 1)
+                agent.speed = speed_1;
+            if (level.exposure_amount == 2)
+                agent.speed = speed_2;
+            if (level.exposure_amount == 3)
+                agent.speed = speed_3;
+            state = State.Not_Dancing;
+        }
     }
 }

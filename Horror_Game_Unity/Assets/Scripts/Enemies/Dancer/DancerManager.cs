@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class DancerManager : MonoBehaviour
 {
+    [Header("Level")]
+    public Level level;
+    public AudioSource music;
+
     [Header("Information")]
     public float music_interval_min;
     public float music_interval_max;
     public float music_interval_current;
 
-    public bool is_music_playing = false;
+    public bool is_music_playing = true;
 
     private void Start()
     {
@@ -28,10 +32,12 @@ public class DancerManager : MonoBehaviour
 
             if (is_music_playing)
             {
+                music.Pause();
                 is_music_playing = false;
             }
             else if (!is_music_playing)
             {
+                music.UnPause();
                 is_music_playing = true;
             }
         }
