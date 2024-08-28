@@ -33,7 +33,7 @@ public class Level3ObjectiveManager : MonoBehaviour
         if (!can_exit)
         {
             collection_sound.Play();
-            objective_text.text = completed_objectives_count + " / 23 debris";
+            objective_text.text = completed_objectives_count + " / 22 debris";
         }
         else
         {
